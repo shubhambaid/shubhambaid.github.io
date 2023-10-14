@@ -1,6 +1,22 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <style>
+        body {
+            animation: trippyBackground 15s linear infinite alternate;
+            background: linear-gradient(-45deg, #f06, #9f9, #06f, #9f9);
+            background-size: 400% 400%;
+        }
+
+        @keyframes trippyBackground {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+    </style>
     <script>
         window.onload = function() {
             const audio = new Audio("/asset/exorcist.mp3"); 
