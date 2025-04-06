@@ -1,144 +1,820 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <title>Shubham Baid | AI & Computer Vision Engineer</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #3a0ca3;
+            --primary-dark: #240046;
+            --secondary: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #38b000;
+            --gradient: linear-gradient(120deg, #4361ee, #3a0ca3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            animation: trippyBackground 15s linear infinite alternate;
-            background: linear-gradient(-45deg, #222, #111, #333, #111);
-            background-size: 400% 400%;
-            color: #ff0000;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
         }
-
-        @keyframes trippyBackground {
-            0% {
-                background-position: 0% 0%;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 70%;
+            height: 100%;
+            background: url("/api/placeholder/800/600") no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .header-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .header-title p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            min-width: 150px;
+        }
+        
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .stat-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3db8df;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 3;
+        }
+        
+        .about-image {
+            flex: 2;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-tag {
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #e9ecef;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .company {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .position {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .duration {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .achievements {
+            margin-top: 1rem;
+        }
+        
+        .achievement-item {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .achievement-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image {
+            height: 180px;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            background: var(--gradient);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .project-tag {
+            background: #f1f3f5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* Education Section */
+        .education-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .degree {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .university {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--primary-dark);
+            color: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-info-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 2.5rem;
             }
-            100% {
-                background-position: 100% 100%;
+            
+            .profile-stats {
+                flex-direction: column;
+                gap: 1rem;
             }
-        }
-
-        /* Add styles for technology names */
-        .nvidia {
-            color: #76B900; /* Nvidia green */
-        }
-
-        .intel {
-            color: #0071C5; /* Intel blue */
-        }
-
-        .tensorflow {
-            color: #FF6F61; /* TensorFlow orange */
-        }
-
-        .pytorch {
-            color: #EE4C2C; /* PyTorch red */
-        }
-
-        .tensorrt {
-            color: #4C4C4C; /* TensorRT gray */
-        }
-
-        .title {
-            font-size: 20px;
-            animation: trippyText 3s linear infinite alternate;
-        }
-
-        @keyframes trippyText {
-            0% {
-                transform: translateX(0);
+            
+            .about-content {
+                flex-direction: column-reverse;
             }
-            100% {
-                transform: translateX(10px);
+            
+            .about-image {
+                margin-bottom: 2rem;
             }
-        }
-
-        /* Responsive styles for mobile */
-        @media screen and (max-width: 768px) {
-            .nes-container {
-                width: 90%;
+            
+            .contact-links {
+                flex-direction: column;
             }
-            .title {
-                font-size: 16px;
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet">
-    <script>
-        window.onload = function() {
-            const audio = new Audio("/asset/exorcist.mp3");
-            audio.loop = true;
-            audio.play();
-        };
-    </script>
 </head>
 <body>
-    <div>
-        <header>
-            <div class="nes-container with-title is-centered">
-                <div style="display: flex; align-items: center;">
-                    <h1 class="title">Hey I'm Shubham</h1>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>Shubham Baid</h1>
+                    <p>Applied Deep Learning & Computer Vision Engineer | Builder & Generalist</p>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <h3>4+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>3</h3>
+                        <p>Certifications</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2</h3>
+                        <p>Publications</p>
+                    </div>
+                </div>
+                
+                <div class="contact-links">
+                    <a href="mailto:shubhambaid99@gmail.com" class="btn btn-primary">Get In Touch</a>
+                    <a href="https://www.linkedin.com/in/shubhambaid21" class="btn btn-outline">LinkedIn Profile</a>
                 </div>
             </div>
-        </header>
-    </div>
-
-    <div class="nes-container with-title is-centered">
-        <h2>About Me</h2>
-        <p>
-            <br>
-            I'm a dedicated Artificial Intelligence Engineer with a deep-seated passion for harnessing AI's boundless potential 
-            to drive innovation and make a positive impact. My journey in the world of technology has led me to develop and fine-tune 
-            cutting-edge computer vision pipelines. Proficient in programming languages like C/C++ and Python, I specialize in leveraging 
-            advanced software and libraries, including OpenCV, <span class="tensorflow">TensorFlow</span>, <span class="pytorch">PyTorch</span>, and <span class="tensorrt">TensorRT</span>.
-        </p>
-
-        <p>
-            <strong>Current Role:</strong>
-            <br>
-            My current role at Sparkcognition involves creating optimized, cross-platform computer vision pipelines and crafting tailored 
-            use-cases on our revolutionary product, VAIA. My commitment to excellence extends to my certifications as a <span class="nvidia">Jetson AI Specialist</span> by Nvidia and an <span class="intel">Edge AI Specialist</span> by Intel. I am dedicated to staying ahead of the curve and staying informed about the latest trends in our dynamic field.
-        </p>
-
-        <p>
-            <strong>Beyond Work:</strong>
-            <br>
-            When I'm not immersed in the exciting world of technology, you'll find me exploring new horizons and drawing inspiration from the 
-            world around me. I'm an avid seeker of adventure, whether that means discovering a new hiking trail or engaging in enlightening tech 
-            conferences. My appetite for knowledge is insatiable.
-        </p>
-
-        <p>
-            <strong>Let's Connect:</strong>
-            <br>
-            If you're interested in engaging in discussions about the realms of AI, computer vision, or the latest technological breakthroughs, 
-            I'd be thrilled to connect with you. Together, we can explore ways to push the boundaries of innovation and create a brighter future.
-        </p>
-    </div>
-
-    <div class="nes-container is-rounded">
-        <h2>Links !</h2>
-        <a href="https://www.linkedin.com/in/shubhambaid21">
-            <i class="nes-icon linkedin is-large"></i>
-        </a>
-        
-        <a href="mailto:shubhambaid99@gmail.com">
-            <i class="nes-icon gmail is-large"></i>
-        </a> 
-
-        <a href="asset/Shubham_Baid.pdf" download>
-            <i class="nes-bulbasaur is-small"></i>
-        </a>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <footer>P.S. the bulbasaur is my resume xD</footer>
-    <footer>Humble thanks to GPT Uncle for the content :')</footer>
+        </div>
+    </header>
+    
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hey! I'm an AI and CV Engineer, driven by a passion for harnessing the limitless potential of AI to create impactful change. I specialize in developing and optimizing cutting-edge computer vision pipelines and integrating Vision Language Models, utilizing my proficiency in C/C++, Python, and advanced software libraries such as OpenCV, PyTorch, TensorFlow, and TensorRT.</p>
+                    <p>My expertise is backed by certifications as a Jetson AI Specialist from Nvidia and an Edge AI Specialist from Intel, reflecting my commitment to staying abreast of the latest advancements in the field.</p>
+                    
+                    <div class="skill-tags">
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">TensorRT</span>
+                        <span class="skill-tag">LLMs</span>
+                        <span class="skill-tag">C/C++</span>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="/api/placeholder/600/600" alt="Shubham Baid Profile" />
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="position">AI Engineer</div>
+                            <div class="company">CAFU</div>
+                        </div>
+                        <div class="duration">January 2025 - April 2025 (4 months)</div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <div class="achievement-item">
+                            Engineered agentic workflow marketing content generation powered by LLMs, delivering 15% CTR increase and 50% reduction in copywriting workflow time through automated content optimization.
+                        </div>
+                        <div class="achievement-item">
+                            Optimised machine learning-based ETA prediction system with real-time analytics, decreasing delayed fulfillment from 13% to 8% (3-month period) and reducing breaches by 42% for delays >5 minutes.
+                        </div>
+                        <div class="achievement-item">
+                            Designed automated B2B lead acquisition with autonomous agents and multi-modal LLMs, processing 1,400 prospects monthly with minimal human intervention. Generated 4 high-conversion leads while achieving 90% reduction in manual prospecting hours and substantial CAC improvement.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="position">Senior AI Engineer</div>
+                            <div class="company">Avathon</div>
+                        </div>
+                        <div class="duration">May 2022 - January 2025 (2 years 9 months)</div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <div class="achievement-item">
+                            Engaged in integrating Multimodal Language Models (LLMs) to optimize traditional CV models accuracy.
+                        </div>
+                        <div class="achievement-item">
+                            Led the development of VAIA's School Safety Suite, implemented use cases including firearm detection and person re-identification across multiple cameras which is now deployed across hundreds of cameras across multiple schools in the US.
+                        </div>
+                        <div class="achievement-item">
+                            Leading a team of AI Engineers and guided them to adapt right practices for streamlined development and timely deliverables.
+                        </div>
+                        <div class="achievement-item">
+                            Designed a resource-efficient computer vision pipeline for low-power ARM hardware, optimizing for limited CPU (50%) and RAM utilising NEON and other libraries, incorporating hardware-level enhancements and model quantization.
+                        </div>
+                        <div class="achievement-item">
+                            Led the development of a gamified auto-image annotation tool, enhancing dataset preparation and model training efficiency through active learning concept.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="position">Senior Artificial Intelligence Engineer</div>
+                            <div class="company">Integration Wizards Solutions</div>
+                        </div>
+                        <div class="duration">December 2021 - May 2022 (6 months)</div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <div class="achievement-item">
+                            Developed an ALPR (Automatic License Plate Recognition) module with high acceleration and minimal resource usage footprint, compatible with both high-speed CPU and GPU inference.
+                        </div>
+                        <div class="achievement-item">
+                            Worked on onboarding various computer vision models to an accelerated inference pipeline for GPUs, resulting in faster and more accurate results.
+                        </div>
+                        <div class="achievement-item">
+                            Contributed to the acquisition by Sparkcognition, a leading AI and machine learning company.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="position">Artificial Intelligence Engineer</div>
+                            <div class="company">Integration Wizards Solutions</div>
+                        </div>
+                        <div class="duration">June 2021 - December 2021 (7 months)</div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <div class="achievement-item">
+                            Modified neural network architectures to optimize for specific use-cases, improving accuracy and performance.
+                        </div>
+                        <div class="achievement-item">
+                            Trained custom computer vision models at scale for warehouses, resulting in increased efficiency in HSE.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="position">Artificial Intelligence Intern</div>
+                            <div class="company">Integration Wizards Solutions</div>
+                        </div>
+                        <div class="duration">September 2020 - May 2021 (9 months)</div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <div class="achievement-item">
+                            Trained backbone models for PPE detection, vehicle body-type classification, and fall-arrester detection.
+                        </div>
+                        <div class="achievement-item">
+                            Deployed computer vision solutions at scale, demonstrating a practical approach to solving complex technical challenges.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects & Publications</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        AI Text Generation
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Text Generation Tool for Writing Assistance</h3>
+                        <p>Developed a transformer-based text generation tool to assist with writing tasks, improving content creation efficiency.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Transformers</span>
+                            <span class="project-tag">Publication</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        Medical CV
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Detection of Different Degrees of Skin Burn using YOLOv3</h3>
+                        <p>Implemented YOLOv3 architecture to accurately detect and classify different degrees of skin burns, aiding medical diagnosis.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">YOLO</span>
+                            <span class="project-tag">Medical AI</span>
+                            <span class="project-tag">Publication</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        School Safety
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">VAIA's School Safety Suite</h3>
+                        <p>Led development of comprehensive safety monitoring system with firearm detection and person re-identification across multiple cameras.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Object Detection</span>
+                            <span class="project-tag">Re-ID</span>
+                            <span class="project-tag">Production</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        ALPR System
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Automatic License Plate Recognition</h3>
+                        <p>Developed high-performance ALPR module with minimal resource footprint for both CPU and GPU inference.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">OCR</span>
+                            <span class="project-tag">Optimization</span>
+                            <span class="project-tag">Production</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Education & Certifications -->
+    <section id="education" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            
+            <div class="education-card">
+                <div class="degree">Bachelor of Technology (BTech), Computer Science</div>
+                <div class="university">REVA University</div>
+                <div class="duration">2017 - 2021</div>
+            </div>
+            
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Professional Certifications</h3>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Nvidia Jetson AI Specialist</h3>
+                        <p>Specialized certification in deploying AI models on edge devices using Nvidia Jetson platform</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">TensorFlow Developer Certificate</h3>
+                        <p>Professional certification in building and training neural networks using TensorFlow</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Convolutional Neural Networks</h3>
+                        <p>Advanced training in CNN architectures and computer vision applications</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Neural Networks and Deep Learning</h3>
+                        <p>Comprehensive certification in neural network fundamentals and deep learning techniques</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Awards & Recognition</h3>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Best Outgoing Student - 2021</h3>
+                        <p>Recognized for academic excellence and contributions to the university</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Hackfest 2019</h3>
+                        <p>Winner of competitive hackathon showcasing innovative AI solutions</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Sentinal Hack 2.0</h3>
+                        <p>Recognition for outstanding project implementation and presentation</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Galactic Problem Solver</h3>
+                        <p>Two-time recipient for excellence in solving complex technical challenges</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info-item">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:shubhambaid99@gmail.com" class="contact-link">shubhambaid99@gmail.com</a></p>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-icon">👨‍💼</div>
+                    <h3>LinkedIn</h3>
+                    <p><a href="https://www.linkedin.com/in/shubhambaid21" class="contact-link">linkedin.com/in/shubhambaid21</a></p>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-icon">💼</div>
+                    <h3>Let's Collaborate</h3>
+                    <p>Open to discussing AI projects and opportunities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Shubham Baid. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/shubhambaid21" class="social-link">in</a>
+                <a href="mailto:shubhambaid99@gmail.com" class="social-link">✉️</a>
+            </div>
+            <p>AI and Computer Vision Engineer | Builder & Generalist</p>
+        </div>
+    </footer>
 </body>
 </html>
