@@ -4,460 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shubham Baid | AI & Computer Vision Engineer</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #3a0ca3;
-            --primary-dark: #240046;
-            --secondary: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #38b000;
-            --gradient: linear-gradient(120deg, #4361ee, #3a0ca3);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* Header Styles */
-        header {
-            background: var(--gradient);
-            color: white;
-            padding: 6rem 0 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 70%;
-            height: 100%;
-            background: url("/api/placeholder/800/600") no-repeat center center;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: 1;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .header-title h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .header-title p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 600px;
-        }
-        
-        .profile-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-            min-width: 150px;
-        }
-        
-        .stat-item h3 {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        
-        .stat-item p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .contact-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background: var(--secondary);
-            color: var(--primary-dark);
-        }
-        
-        .btn-outline {
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #3db8df;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        /* Section Styles */
-        section {
-            padding: 5rem 0;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 50px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        /* About Section */
-        .about-content {
-            display: flex;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .about-text {
-            flex: 3;
-        }
-        
-        .about-image {
-            flex: 2;
-            position: relative;
-        }
-        
-        .about-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 2rem;
-        }
-        
-        .skill-tag {
-            background: var(--light);
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-        }
-        
-        /* Experience Section */
-        .timeline {
-            position: relative;
-            margin-top: 3rem;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: #e9ecef;
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 3rem;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 4px solid white;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-        
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        
-        .company {
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .position {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        .duration {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .achievements {
-            margin-top: 1rem;
-        }
-        
-        .achievement-item {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-        
-        .achievement-item::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .project-image {
-            height: 180px;
-            background: var(--gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            background: var(--gradient);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .project-tag {
-            background: #f1f3f5;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-        
-        /* Education Section */
-        .education-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-        
-        .degree {
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .university {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            background: var(--primary-dark);
-            color: white;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .contact-info-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .contact-info-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-link {
-            color: var(--secondary);
-            text-decoration: none;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            transition: background 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-title h1 {
-                font-size: 2.5rem;
-            }
-            
-            .profile-stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .about-content {
-                flex-direction: column-reverse;
-            }
-            
-            .about-image {
-                margin-bottom: 2rem;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Add Font Awesome for icons -->
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">Shubham Baid</a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header Section -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="header-title">
                     <h1>Shubham Baid</h1>
-                    <p>Applied Deep Learning & Computer Vision Engineer | Builder & Generalist</p>
+                    <p>AI and Computer Vision Engineer</p> <!-- Updated Subtitle -->
                 </div>
                 
                 <div class="profile-stats">
@@ -466,18 +42,21 @@
                         <p>Years Experience</p>
                     </div>
                     <div class="stat-item">
-                        <h3>3</h3>
+                        <h3>5+</h3> <!-- Updated Certifications Count -->
                         <p>Certifications</p>
                     </div>
-                    <div class="stat-item">
-                        <h3>2</h3>
-                        <p>Publications</p>
-                    </div>
+                    <a href="#publications" style="text-decoration: none; color: inherit;"> <!-- Link added -->
+                        <div class="stat-item">
+                            <h3>2</h3>
+                            <p>Publications</p>
+                        </div>
+                    </a>
                 </div>
                 
                 <div class="contact-links">
                     <a href="mailto:shubhambaid99@gmail.com" class="btn btn-primary">Get In Touch</a>
-                    <a href="https://www.linkedin.com/in/shubhambaid21" class="btn btn-outline">LinkedIn Profile</a>
+                    <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="btn btn-outline">LinkedIn Profile</a>
+                    <a href="asset/Shubham_Baid.pdf" download="Shubham_Baid_Resume.pdf" class="btn btn-outline">Download Resume</a> <!-- Added Resume Button -->
                 </div>
             </div>
         </div>
@@ -490,24 +69,29 @@
             
             <div class="about-content">
                 <div class="about-text">
-                    <p>Hey! I'm an AI and CV Engineer, driven by a passion for harnessing the limitless potential of AI to create impactful change. I specialize in developing and optimizing cutting-edge computer vision pipelines and integrating Vision Language Models, utilizing my proficiency in C/C++, Python, and advanced software libraries such as OpenCV, PyTorch, TensorFlow, and TensorRT.</p>
-                    <p>My expertise is backed by certifications as a Jetson AI Specialist from Nvidia and an Edge AI Specialist from Intel, reflecting my commitment to staying abreast of the latest advancements in the field.</p>
+                    <p>Hey! I'm an AI and Computer Vision Engineer, driven by a passion for harnessing the limitless potential of AI to create impactful change. I specialize in developing and optimizing cutting-edge computer vision pipelines and integrating Vision Language Models (VLMs) & Large Language Models (LLMs).</p> <!-- Refined About Text -->
+                    <p>My core expertise lies in C/C++, Python, and advanced libraries like OpenCV, PyTorch, TensorFlow, and TensorRT. I thrive on building robust, efficient AI solutions and staying ahead of the curve in this rapidly evolving field.</p>
+                    <p>My work is backed by certifications including Nvidia Jetson AI Specialist, Intel Edge AI Specialist, and TensorFlow Developer, reflecting my commitment to continuous learning and practical application.</p>
                     
                     <div class="skill-tags">
                         <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Deep Learning</span>
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">C/C++</span>
                         <span class="skill-tag">PyTorch</span>
                         <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">OpenCV</span>
                         <span class="skill-tag">TensorRT</span>
-                        <span class="skill-tag">LLMs</span>
-                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">LLMs / VLMs</span>
+                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">Edge AI</span>
+                        <span class="skill-tag">Model Optimization</span>
+                        <span class="skill-tag">Rapid Prototyping</span>
                     </div>
                 </div>
                 
                 <div class="about-image">
-                    <img src="/api/placeholder/600/600" alt="Shubham Baid Profile" />
+                    <img src="asset/me.jpg" alt="Shubham Baid Profile" /> <!-- Placeholder Image -->
                 </div>
             </div>
         </div>
@@ -631,6 +215,40 @@
             </div>
         </div>
     </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="projects-grid"> <!-- Reusing projects-grid for layout -->
+                <div class="project-card"> <!-- Publication 1 -->
+                    <div class="project-content">
+                        <h3 class="project-title">Text Generation Tool for Writing Assistance using Transformer.</h3>
+                        <p>JAZ 2023, Vol 44, p938 April 1, 2023</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Writing assistance tool build using transformer. Submitted for publication in August 2020, apparently got approved in 2023.</p>
+                        <div class="project-tags" style="margin-top: 1rem;">
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Transformers</span>
+                            <span class="project-tag">Generative AI</span>
+                        </div>
+                        <a href="https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fopenurl%2Eebsco%2Ecom%2FEPDB%253Agcd%253A5%253A23459157%2Fdetailv2%3Fsid%3Debsco%253Aplink%253Ascholar%26id%3Debsco%253Agcd%253A174368172%26crl%3Dc%26link_origin%3Dscholar%2Egoogle%2Ecom&urlhash=WoZS&trk=public_profile_publication-button" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; background: var(--primary); color: white;">See Publication</a>
+                    </div>
+                </div>
+                <div class="project-card"> <!-- Publication 2 -->
+                     <div class="project-content">
+                        <h3 class="project-title">Detection of Different Degrees of Skin Burn using YOLOv3</h3>
+                        <p>TEST Engineering and Management May 1, 2020</p>
+                         <div class="project-tags" style="margin-top: 1rem;">
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">YOLOv3</span>
+                            <span class="project-tag">Medical AI</span>
+                        </div>
+                        <a href="https://www.linkedin.com/redir/redirect?url=http%3A%2F%2Fwww%2Etestmagzine%2Ebiz%2Findex%2Ephp%2Ftestmagzine%2Farticle%2Fview%2F8100%2F6122&urlhash=3kfO&trk=public_profile_publication-button" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; background: var(--primary); color: white;">See Publication</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- Projects Section -->
     <section id="projects">
@@ -638,6 +256,101 @@
             <h2 class="section-title">Projects & Publications</h2>
             
             <div class="projects-grid">
+                 <div class="project-card"> <!-- YetiCoach -->
+                    <div class="project-image">
+                        Ski Analysis
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">YetiCoach</h3>
+                        <p>Developed a tool providing skiers with data on ski angles and gap at different steepness levels using only an action camera.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">Sports Tech</span>
+                            <span class="project-tag">Hackathon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card"> <!-- Aegir -->
+                    <div class="project-image">
+                        Ocean Debris AI
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Aegir - Ocean Debris AI</h3>
+                        <p>Platform using CV & DL on satellite/UAV data to locate, classify, and predict ocean debris trajectory, aiding cleanup efforts.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">Deep Learning</span>
+                            <span class="project-tag">Edge AI</span>
+                            <span class="project-tag">NASA Space Apps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card"> <!-- Argus -->
+                    <div class="project-image">
+                        Disaster Response Drone
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Argus</h3>
+                        <p>Autonomous drone system using DL & CV to generate critical data (locality density, population estimates, depth data) for natural disaster areas.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Deep Learning</span>
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">UAV</span>
+                            <span class="project-tag">Disaster Tech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card"> <!-- Hailey -->
+                    <div class="project-image">
+                        AI Writing Assistant
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Hailey</h3>
+                        <p>AI-based writing assistant leveraging Hugging Face Transformers and GPT-2 for text generation and sentence completion.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Transformers</span>
+                            <span class="project-tag">GPT-2</span>
+                            <span class="project-tag">Generative AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card"> <!-- AutoSnotBot -->
+                    <div class="project-image">
+                        Whale Snot Detection
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AutoSnotBot</h3>
+                        <p>Automated drone using custom YOLO model to detect whales and collect snot samples for algal bloom prediction.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Object Detection</span>
+                            <span class="project-tag">YOLO</span>
+                            <span class="project-tag">UAV</span>
+                            <span class="project-tag">Environmental AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card"> <!-- Cap for Blind -->
+                    <div class="project-image">
+                        Assistive Tech Cap
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Cap for Blind</h3>
+                        <p>Arduino-based cap with ultrasonic sensors providing haptic feedback to assist visually impaired individuals.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">IoT</span>
+                            <span class="project-tag">Assistive Tech</span>
+                            <span class="project-tag">Hardware</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card">
                     <div class="project-image">
                         AI Text Generation
@@ -715,7 +428,13 @@
             <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Professional Certifications</h3>
             
             <div class="projects-grid">
-                <div class="project-card">
+                 <div class="project-card"> <!-- Added Intel Cert -->
+                    <div class="project-content">
+                        <h3 class="project-title">Intel Edge AI Certification</h3>
+                        <p>Certification focused on optimizing and deploying AI solutions on Intel hardware for edge computing.</p>
+                    </div>
+                </div>
+               <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Nvidia Jetson AI Specialist</h3>
                         <p>Specialized certification in deploying AI models on edge devices using Nvidia Jetson platform</p>
@@ -732,14 +451,14 @@
                 <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Convolutional Neural Networks</h3>
-                        <p>Advanced training in CNN architectures and computer vision applications</p>
+                        <p>Advanced training in CNN architectures and computer vision applications (Coursera)</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Neural Networks and Deep Learning</h3>
-                        <p>Comprehensive certification in neural network fundamentals and deep learning techniques</p>
+                        <p>Comprehensive certification in neural network fundamentals and deep learning techniques (Coursera)</p>
                     </div>
                 </div>
             </div>
@@ -747,31 +466,43 @@
             <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Awards & Recognition</h3>
             
             <div class="projects-grid">
-                <div class="project-card">
+                 <div class="project-card"> <!-- Added Hack Zurich -->
+                    <div class="project-content">
+                        <h3 class="project-title">Track Winner - Hack Zurich 2022</h3>
+                        <p>Awarded for winning a specific track at Europe's largest hackathon.</p>
+                    </div>
+                </div>
+                 <div class="project-card"> <!-- Added NASA Space Apps 2022 -->
+                    <div class="project-content">
+                        <h3 class="project-title">Track Winner - NASA Space Apps 2022</h3>
+                        <p>Recognized for winning a track in the international NASA hackathon.</p>
+                    </div>
+                </div>
+               <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Best Outgoing Student - 2021</h3>
-                        <p>Recognized for academic excellence and contributions to the university</p>
+                        <p>Recognized for academic excellence and contributions to REVA University</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Hackfest 2019</h3>
-                        <p>Winner of competitive hackathon showcasing innovative AI solutions</p>
+                        <p>2nd Prize in National Level Hackathon conducted by REVA University</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Sentinal Hack 2.0</h3>
-                        <p>Recognition for outstanding project implementation and presentation</p>
+                        <p>2nd position at State Level Hackathon conducted by KSIT</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-content">
                         <h3 class="project-title">Galactic Problem Solver</h3>
-                        <p>Two-time recipient for excellence in solving complex technical challenges</p>
+                        <p>Two-time recipient (2019, 2020) for completing NASA Space Apps challenges.</p>
                     </div>
                 </div>
             </div>
@@ -791,13 +522,13 @@
                 </div>
                 
                 <div class="contact-info-item">
-                    <div class="contact-icon">👨‍💼</div>
+                    <div class="contact-icon"><i class="fab fa-linkedin"></i></div> <!-- Using Font Awesome Icon -->
                     <h3>LinkedIn</h3>
-                    <p><a href="https://www.linkedin.com/in/shubhambaid21" class="contact-link">linkedin.com/in/shubhambaid21</a></p>
+                    <p><a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="contact-link">linkedin.com/in/shubhambaid21</a></p>
                 </div>
                 
                 <div class="contact-info-item">
-                    <div class="contact-icon">💼</div>
+                    <div class="contact-icon">🤝</div>
                     <h3>Let's Collaborate</h3>
                     <p>Open to discussing AI projects and opportunities</p>
                 </div>
@@ -810,11 +541,29 @@
         <div class="container">
             <p>© 2025 Shubham Baid. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/shubhambaid21" class="social-link">in</a>
-                <a href="mailto:shubhambaid99@gmail.com" class="social-link">✉️</a>
+                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:shubhambaid99@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <!-- Add other social links like GitHub if available -->
             </div>
             <p>AI and Computer Vision Engineer | Builder & Generalist</p>
         </div>
     </footer>
+
+    <script>
+        // Basic mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close nav when a link is clicked (optional)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
