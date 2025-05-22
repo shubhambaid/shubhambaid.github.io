@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide to LLM Testing and Fine-tuning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Report Info: Table 1 (Evaluation Metrics) -> Goal: Compare metrics -> Viz: Interactive HTML Table -> Interaction: Sort, Filter, Expand Row -> Justification: Digestible comparison -> Library: JS.
+        - Report Info: Table 2 (Decision Matrix) -> Goal: Compare PromptEng/RAG/Fine-tuning -> Viz: Interactive HTML Table -> Interaction: Highlight, Column Summary -> Justification: Quick comparison -> Library: JS.
+        - Report Info: Resource Requirements (from Table 2 text) -> Goal: Illustrate relative resource needs -> Viz: Grouped Bar Chart (Chart.js) -> Interaction: Tooltips -> Justification: Visual comparison of abstract costs -> Library: Chart.js.
+        - Report Info: Evaluation Tools List -> Goal: Inform about tools -> Viz: Filterable List -> Interaction: Filter by category -> Justification: Easy tool discovery -> Library: JS.
+        - Report Info: Benchmarks List -> Goal: Inform about benchmarks -> Viz: Expandable List Items -> Interaction: Click to expand details -> Justification: Progressive disclosure -> Library: JS.
+        - Report Info: Learning Resources -> Goal: Provide links -> Viz: Categorized, Filterable Lists -> Interaction: Clickable links, filter by type -> Justification: Organized access -> Library: JS.
+        - Textual Content: Presented in sections with accordions/toggles for dense parts to improve readability and navigation.
+        -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link { transition: all 0.3s ease; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 600; }
+        .nav-link:hover { color: #0369a1; }
+        .section-title { color: #0369a1; }
+        .subsection-title { color: #075985; }
+        .content-card { background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .accordion-button { background-color: #f0f9ff; color: #0c4a6e; text-align: left; padding: 0.75rem 1rem; border: 1px solid #e0f2fe; border-radius: 0.375rem; width: 100%; font-weight: 500; cursor: pointer; transition: background-color 0.3s; }
+        .accordion-button:hover { background-color: #e0f2fe; }
+        .accordion-content { display: none; padding: 1rem; border: 1px solid #e0f2fe; border-top: none; border-radius: 0 0 0.375rem 0.375rem; background-color: #f8fafc; }
+        .table-interactive th { cursor: pointer; }
+        .table-interactive th:hover { background-color: #f0f9ff; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 400px; max-height: 450px; padding: 1rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        @media (max-width: 768px) {
+            .chart-container { height: 300px; max-height: 350px; }
+            .nav-link { padding: 0.5rem; font-size: 0.875rem; }
+        }
+        .filter-button { background-color: #0ea5e9; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; margin-right: 0.5rem; margin-bottom: 0.5rem; font-size: 0.875rem; }
+        .filter-button.active { background-color: #0369a1; }
+        .filter-button:hover { background-color: #0284c7; }
+        .tooltip { position: relative; display: inline-block; }
+        .tooltip .tooltiptext { visibility: hidden; width: 200px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -100px; opacity: 0; transition: opacity 0.3s; font-size: 0.75rem; }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-sky-700">LLM Guide</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Introduction</a>
+                        <a href="#testing" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Testing LLMs</a>
+                        <a href="#finetuning" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Fine-Tuning LLMs</a>
+                        <a href="#resources" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Learning Resources</a>
+                        <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Conclusion</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-500 hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#intro" class="nav-link block px-3 py-2 rounded-md text-base font-medium border-b-2 border-transparent">Introduction</a>
+                <a href="#testing" class="nav-link block px-3 py-2 rounded-md text-base font-medium border-b-2 border-transparent">Testing LLMs</a>
+                <a href="#finetuning" class="nav-link block px-3 py-2 rounded-md text-base font-medium border-b-2 border-transparent">Fine-Tuning LLMs</a>
+                <a href="#resources" class="nav-link block px-3 py-2 rounded-md text-base font-medium border-b-2 border-transparent">Learning Resources</a>
+                <a href="#conclusion" class="nav-link block px-3 py-2 rounded-md text-base font-medium border-b-2 border-transparent">Conclusion</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="intro" class="mb-12 pt-16 -mt-16">
+            <h1 class="text-4xl font-bold mb-6 section-title">Navigating the LLM Landscape</h1>
+            <div class="content-card">
+                <p class="mb-4">Large Language Models (LLMs) have rapidly become indispensable tools, demonstrating unprecedented capabilities in understanding, generating, and following complex instructions. Their integration across diverse real-world applications, from customer service to scientific research, underscores a critical need for rigorous evaluation and specialized adaptation.</p>
+                <p class="mb-4">While foundational LLMs exhibit remarkable proficiency in generalized tasks, the demands of practical applications often necessitate tailored performance, driving the imperative for techniques like fine-tuning. This guide provides a comprehensive overview of effective LLM testing methodologies, outlines the strategic considerations for fine-tuning, and curates essential learning resources for mastering these advanced techniques.</p>
+                <p>The aim is to equip practitioners with the knowledge required to confidently develop, deploy, and optimize LLM-powered solutions that meet specific functional and ethical requirements.</p>
+            </div>
+        </section>
+
+        <section id="testing" class="mb-12 pt-16 -mt-16">
+            <h1 class="text-4xl font-bold mb-6 section-title">How to Effectively Test LLMs for Specific Tasks</h1>
+            <div class="content-card">
+                <p class="mb-6">Evaluating the performance of Large Language Models is a multifaceted endeavor that extends far beyond traditional natural language processing (NLP) metrics. The complex, generative nature of LLMs demands a sophisticated approach to assessment, incorporating both automated and human-centric methodologies to ensure reliability, accuracy, and ethical alignment. This section explores the nuances of LLM evaluation, key criteria, robust test set design, common benchmarks, and practical tools available.</p>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">A. The Nuances of LLM Evaluation: Beyond Traditional Metrics</h2>
+                <button class="accordion-button mb-2" data-target="nuances-content">Toggle Details</button>
+                <div id="nuances-content" class="accordion-content mb-6">
+                    <h3 class="text-xl font-medium mb-2">1. Limitations of Traditional NLG Metrics</h3>
+                    <p class="mb-3">Traditional automatic evaluation metrics, such as BLEU and ROUGE, primarily quantify n-gram overlap and often fail to capture semantic meaning, contextual understanding, or the overall coherence and naturalness of generated text. Perplexity, while indicating model "surprise," doesn't directly assess quality or factual accuracy.</p>
+                    <h3 class="text-xl font-medium mb-2">2. Emergence of LLM-as-a-Judge</h3>
+                    <p class="mb-3">This paradigm uses LLMs to assess outputs, offering flexibility via natural language requirements. However, LLM-scoring is vulnerable to "simple concatenation attacks," where adversarial phrases can inflate scores, highlighting a need for caution and robust systems.</p>
+                    <h3 class="text-xl font-medium mb-2">3. The Indispensable Role of Human Evaluation</h3>
+                    <p>Human evaluation remains the "gold standard" for capturing subjective content, nuances, and ethical considerations. Though costly and less scalable, it provides essential qualitative depth. Hybrid approaches combining automated tools with human review are often most effective.</p>
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">B. Key Evaluation Criteria and Quality Aspects</h2>
+                <button class="accordion-button mb-2" data-target="criteria-content">Toggle Details</button>
+                <div id="criteria-content" class="accordion-content mb-6">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Accuracy, Factual Consistency, and Relevance:</strong> Ensuring content is factually correct, internally coherent, and directly addresses the query.</li>
+                        <li><strong>Fluency, Coherence, and Naturalness:</strong> Assessing grammatical correctness, logical flow, and human-like stylistic quality.</li>
+                        <li><strong>Safety, Bias, and Robustness:</strong> Preventing harmful content, ensuring equitable treatment across demographics, and testing resilience against diverse inputs including adversarial attacks.</li>
+                    </ul>
+                </div>
+                
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">C. Designing Robust Test Sets and Evaluation Protocols</h2>
+                <button class="accordion-button mb-2" data-target="testsets-content">Toggle Details</button>
+                <div id="testsets-content" class="accordion-content mb-6">
+                    <h3 class="text-xl font-medium mb-2">1. Principles of Data Quality and Representativeness</h3>
+                    <p class="mb-3">Evaluation datasets must be high-quality, clean, and representative of real-world scenarios, including variations and edge cases. For fine-tuning, labeled input-output pairs are critical.</p>
+                    <h3 class="text-xl font-medium mb-2">2. Crafting Diverse Test Cases</h3>
+                    <p class="mb-3">Test suites should include "happy path" (common inputs), "edge cases" (atypical/complex inputs), and "adversarial cases" (malicious inputs) to probe capabilities and limitations comprehensively.</p>
+                    <h3 class="text-xl font-medium mb-2">3. Best Practices for Scoring and Criteria Definition</h3>
+                    <p>Employ binary or low-precision scoring for consistency. Provide explicit, unambiguous definitions for criteria. Break down complex criteria into simpler evaluators.</p>
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">D. Leveraging Common LLM Benchmarks and Understanding Their Limitations</h2>
+                <div class="mb-4">
+                    <input type="text" id="benchmarkFilter" class="w-full p-2 border border-slate-300 rounded-md mb-4" placeholder="Filter benchmarks by name...">
+                </div>
+                <div id="benchmarksList" class="space-y-3 mb-6">
+                </div>
+                <p class="text-sm text-slate-600">While useful, benchmarks can suffer from data contamination, become outdated, have restricted scope, and may not reflect real-world performance. Custom, application-specific benchmarks are often necessary.</p>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">E. Practical LLM Evaluation Frameworks and Tools</h2>
+                <div class="mb-4">
+                    <input type="text" id="toolFilter" class="w-full p-2 border border-slate-300 rounded-md mb-4" placeholder="Filter tools by name or feature...">
+                </div>
+                <div id="toolsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">Table 1: Comparative Overview of LLM Evaluation Metrics</h2>
+                <p class="mb-4">The following table provides a comparative overview of various LLM evaluation metrics, their types, what they measure, and their typical applications. You can click on column headers to sort the table.</p>
+                <div class="overflow-x-auto">
+                    <table id="evaluationMetricsTable" class="min-w-full bg-white border border-slate-300 table-interactive">
+                        <thead class="bg-sky-100">
+                            <tr>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Metric/Method">Metric/Method</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Type">Type</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="What it Measures">What it Measures</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Best Use Case">Best Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody id="evaluationMetricsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                 <div id="metricModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
+                    <div class="relative mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
+                        <div class="mt-3 text-center">
+                            <h3 id="modalTitle" class="text-lg leading-6 font-medium text-gray-900">Metric Details</h3>
+                            <div class="mt-2 px-7 py-3 text-left">
+                                <p class="text-sm text-gray-500"><strong>Type:</strong> <span id="modalType"></span></p>
+                                <p class="text-sm text-gray-500"><strong>Measures:</strong> <span id="modalMeasures"></span></p>
+                                <p class="text-sm text-gray-500"><strong>Pros:</strong> <span id="modalPros"></span></p>
+                                <p class="text-sm text-gray-500"><strong>Cons:</strong> <span id="modalCons"></span></p>
+                                <p class="text-sm text-gray-500"><strong>Best Use Case:</strong> <span id="modalUseCase"></span></p>
+                            </div>
+                            <div class="items-center px-4 py-3">
+                                <button id="closeModalButton" class="px-4 py-2 bg-sky-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-300">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="finetuning" class="mb-12 pt-16 -mt-16">
+            <h1 class="text-4xl font-bold mb-6 section-title">When to Consider Fine-Tuning Large Language Models</h1>
+            <div class="content-card">
+                <p class="mb-6">Fine-tuning is a powerful strategy for specializing LLMs, but its application should be a deliberate decision, weighed against alternative optimization techniques like prompt engineering and Retrieval Augmented Generation (RAG). This section delves into understanding fine-tuning, strategic decision-making, key scenarios, data requirements, computational costs, and parameter-efficient techniques.</p>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">A. Understanding LLM Fine-Tuning: Adapting Pre-trained Knowledge</h2>
+                <button class="accordion-button mb-2" data-target="understandingFT-content">Toggle Details</button>
+                <div id="understandingFT-content" class="accordion-content mb-6">
+                    <p class="mb-3">Fine-tuning adapts a pre-trained LLM to a specific task by further training on a smaller, domain-specific dataset. It adjusts internal parameters (weights) to align predictions with new labeled outputs, building on the model's foundational knowledge.</p>
+                    <h3 class="text-xl font-medium mb-2">1. Supervised Fine-Tuning (SFT) and Preference Fine-Tuning (PFT)</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>SFT:</strong> Trains on labeled input-output pairs to teach specific response types, optimizing for task accuracy.</li>
+                        <li><strong>PFT:</strong> Aligns LLMs with human preferences by steering towards favored responses and away from undesirable ones, using datasets of "preferred" vs. "not preferred" outputs.</li>
+                    </ul>
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">B. Strategic Decision-Making: Fine-Tuning vs. Prompt Engineering vs. RAG</h2>
+                <p class="mb-4">Prompt engineering, RAG, and fine-tuning are distinct yet complementary methods. The following table helps compare them. Click headers to sort or cells for more info (mock interaction).</p>
+                <div class="overflow-x-auto">
+                    <table id="decisionMatrixTable" class="min-w-full bg-white border border-slate-300 table-interactive">
+                        <thead class="bg-sky-100">
+                            <tr>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Feature">Feature</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Prompt Engineering">Prompt Engineering</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="RAG">RAG</th>
+                                <th class="p-3 text-left text-sm font-semibold text-sky-700 border-b" data-sort="Fine-tuning">Fine-tuning</th>
+                            </tr>
+                        </thead>
+                        <tbody id="decisionMatrixTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4 text-sm text-slate-600">These methods are often combined for optimal outcomes. For example, RAG can provide current information, while fine-tuning ensures consistent tone, and prompt engineering guides data utilization.</p>
+                
+                <h3 class="text-xl font-semibold my-4 subsection-title">Resource Requirements Comparison</h3>
+                <p class="mb-4">The chart below visualizes the relative resource requirements (Time, Compute, Data) for Prompt Engineering, RAG, and Fine-tuning. Values are on a relative scale (1=Low, 2=Moderate, 3=High) for illustrative purposes.</p>
+                <div class="chart-container">
+                    <canvas id="resourceComparisonChart"></canvas>
+                </div>
+
+
+                <h2 class="text-2xl font-semibold mt-6 mb-4 subsection-title">C. Key Scenarios Driving the Need for Fine-Tuning</h2>
+                <div id="finetuningScenarios" class="space-y-3 mb-6"></div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">D. Data Requirements and Best Practices for Fine-Tuning Datasets</h2>
+                <button class="accordion-button mb-2" data-target="dataReqFT-content">Toggle Details</button>
+                <div id="dataReqFT-content" class="accordion-content mb-6">
+                    <h3 class="text-xl font-medium mb-2">1. Importance of High-Quality, Clean, and Representative Data</h3>
+                    <p class="mb-3">"Proper data curation and quality, rather than volume alone, are often the keys". Data must be well-structured, clean, free of duplicates/inconsistencies, representative of the target task, and balanced.</p>
+                    <h3 class="text-xl font-medium mb-2">2. Data Curation and Annotation Guidelines</h3>
+                    <p>Dataset should match the task (input-output pairs for SFT, preferred/not-preferred for PFT). Challenges include data scarcity and labeling costs. Automated tools can aid quality.</p>
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">E. Computational Resources and Cost Implications of Fine-Tuning</h2>
+                <button class="accordion-button mb-2" data-target="computeCostFT-content">Toggle Details</button>
+                <div id="computeCostFT-content" class="accordion-content mb-6">
+                    <h3 class="text-xl font-medium mb-2">1. GPU Memory and Hardware Requirements</h3>
+                    <p class="mb-3">Standard fine-tuning is computationally expensive. Smaller LLMs (7B) might use a single RTX 3090/4090 (24GB VRAM). Larger models (70B) may need 8x A100/H100 GPUs. Memory for a 70B model: ~280GB (FP32), ~140GB (FP16), ~70GB (8-bit quantization).</p>
+                    <h3 class="text-xl font-medium mb-2">2. Cost-Effective Cloud Solutions and Pricing Models</h3>
+                    <p>Major cloud providers (AWS, Azure, Google Cloud) offer high-end GPUs. Specialized platforms like Vast.ai, Together AI offer more cost-effective GPU rentals. LLM cost calculators can help estimate expenses. Fine-tuning smaller models can be cheaper than extensive prompting of larger ones.</p>
+                </div>
+
+                <h2 class="text-2xl font-semibold mb-4 subsection-title">F. Parameter-Efficient Fine-Tuning (PEFT) Techniques</h2>
+                <button class="accordion-button mb-2" data-target="peft-content">Toggle Details</button>
+                <div id="peft-content" class="accordion-content mb-6">
+                    <p class="mb-3">PEFT methods adapt LLMs by adjusting only a limited number of parameters, reducing computational complexity, memory, and storage.</p>
+                    <h3 class="text-xl font-medium mb-2">1. LoRA (Low-Rank Adaptation) and QLoRA</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>LoRA:</strong> Freezes pre-trained weights and injects small, trainable low-rank decomposition matrices (adapters) into layers, reducing trainable parameters significantly.</li>
+                        <li><strong>QLoRA:</strong> Combines LoRA with quantization (e.g., 4-bit models) for highly accurate yet compact models. Advancements like IR-QLoRA aim to improve information retention.</li>
+                    </ul>
+                    <h3 class="text-xl font-medium mt-3 mb-2">2. Other Adapter-Based Methods</h3>
+                    <p>Includes Prefix-Tuning, Series Adapter, Parallel Adapter, focusing on small, task-specific modules while keeping the base model frozen for adaptability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="mb-12 pt-16 -mt-16">
+            <h1 class="text-4xl font-bold mb-6 section-title">Best Resources for Learning LLM Fine-Tuning</h1>
+            <div class="content-card">
+                <p class="mb-6">Acquiring proficiency in LLM fine-tuning requires access to high-quality, up-to-date resources that span official documentation, structured courses, foundational research, and community-driven knowledge. This section provides a curated list of such resources to guide your learning journey.</p>
+                
+                <div class="mb-6">
+                    <span class="font-semibold mr-2">Filter by Type:</span>
+                    <button class="filter-button active" data-filter="all">All</button>
+                    <button class="filter-button" data-filter="docs">Official Docs</button>
+                    <button class="filter-button" data-filter="courses">Courses</button>
+                    <button class="filter-button" data-filter="papers">Academic Papers</button>
+                    <button class="filter-button" data-filter="community">Community</button>
+                </div>
+                <div id="learningResourcesList" class="space-y-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="pt-16 -mt-16">
+            <h1 class="text-4xl font-bold mb-6 section-title">Conclusion: The Path Forward in LLM Development</h1>
+            <div class="content-card">
+                <p class="mb-4">The landscape of Large Language Model development is characterized by relentless innovation, particularly in evaluation and fine-tuning. We've moved beyond simplistic metrics to comprehensive frameworks integrating automated tools, LLM-as-a-judge, and human oversight, with a heightened focus on safety, fairness, and robustness. Custom, application-specific benchmarks are becoming essential.</p>
+                <p class="mb-4">Fine-tuning is a powerful, increasingly accessible strategy for specializing LLMs, enabling domain expertise, task-specific accuracy, and ethical alignment. It's best considered alongside prompt engineering and RAG, often combined for optimal results. PEFT techniques like LoRA and QLoRA have democratized access to fine-tuning.</p>
+                <p>The abundance of resources—official documentation, courses, academic papers, and community forums—underscores the field's maturity. Future directions will focus on enhancing PEFT efficiency, developing robust evaluation protocols, and systematically integrating ethical considerations. A multidisciplinary approach, blending theory with practice and a commitment to responsible AI, defines the path forward.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 text-center p-6 mt-12">
+        <p>&copy; <span id="currentYear"></span> Interactive LLM Guide. Content based on the provided report.</p>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Smooth scrolling and active nav link highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('main section');
+
+        function changeActiveLink() {
+            let index = sections.length;
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+        changeActiveLink(); // Initial call
+        window.addEventListener('scroll', changeActiveLink);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Offset for sticky header
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+                if (content) {
+                    content.style.display = content.style.display === 'none' || content.style.display === '' ? 'block' : 'none';
+                    button.textContent = content.style.display === 'block' ? 'Hide Details' : 'Show Details';
+                }
+            });
+        });
+
+        // Footer year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Data for benchmarks
+        const benchmarksData = [
+            { name: "MMLU (Massive Multitask Language Understanding)", description: "Evaluates multitask accuracy across 57 diverse subjects (STEM to humanities), assessing world knowledge and problem-solving.", keywords: "multitask accuracy knowledge problem-solving" },
+            { name: "HumanEval", description: "Focuses on Python coding tasks, testing language comprehension, algorithmic understanding, and basic math problem-solving in code generation.", keywords: "python code algorithm math" },
+            { name: "HellaSwag", description: "Assesses commonsense reasoning through sentence completion tasks.", keywords: "commonsense reasoning sentence completion" },
+            { name: "GPQA (Graduate-Level Google-Proof Q&A)", description: "Designed to test advanced reasoning capabilities.", keywords: "advanced reasoning Q&A" },
+            { name: "MATH", description: "Comprises math problems across seven difficulty levels.", keywords: "mathematics problems difficulty" },
+            { name: "BFCL (Berkeley Function-Calling Leaderboard)", description: "Measures the model's ability to correctly call functions and tools.", keywords: "function calling tools api" },
+            { name: "TruthfulQA", description: "Evaluates truthfulness, targeting areas where human misconceptions might lead to incorrect answers.", keywords: "truthfulness misconceptions factual" },
+            { name: "Chatbot Arena / MT Bench", description: "Used to assess complex conversational abilities, often relying on human rankings for evaluation.", keywords: "chatbot conversation human ranking" }
+        ];
+
+        const benchmarksList = document.getElementById('benchmarksList');
+        const benchmarkFilter = document.getElementById('benchmarkFilter');
+
+        function renderBenchmarks(filter = "") {
+            benchmarksList.innerHTML = '';
+            const filteredData = benchmarksData.filter(b => 
+                b.name.toLowerCase().includes(filter.toLowerCase()) || 
+                b.description.toLowerCase().includes(filter.toLowerCase()) ||
+                b.keywords.toLowerCase().includes(filter.toLowerCase())
+            );
+            filteredData.forEach(bench => {
+                const div = document.createElement('div');
+                div.className = 'p-3 border border-sky-200 rounded-md bg-sky-50';
+                const button = document.createElement('button');
+                button.className = 'accordion-button !bg-sky-100 !text-sky-800 text-left w-full font-semibold';
+                button.textContent = bench.name + " (Show Details)";
+                const content = document.createElement('div');
+                content.className = 'accordion-content !bg-sky-50 !border-sky-100 mt-1';
+                content.innerHTML = `<p class="text-sm text-slate-700">${bench.description}</p>`;
+                
+                button.addEventListener('click', () => {
+                    content.style.display = content.style.display === 'none' || content.style.display === '' ? 'block' : 'none';
+                    button.textContent = content.style.display === 'block' ? `${bench.name} (Hide Details)` : `${bench.name} (Show Details)`;
+                });
+
+                div.appendChild(button);
+                div.appendChild(content);
+                benchmarksList.appendChild(div);
+            });
+        }
+        renderBenchmarks();
+        benchmarkFilter.addEventListener('input', (e) => renderBenchmarks(e.target.value));
+
+
+        // Data for tools
+        const toolsData = [
+            { name: "SuperAnnotate", description: "Offers customizable editors for building high-quality evaluation and fine-tuning datasets.", features: "dataset creation editor" },
+            { name: "Amazon Bedrock", description: "Amazon's managed service for foundation models, includes integrated evaluation capabilities.", features: "aws managed evaluation" },
+            { name: "Nvidia NeMo", description: "Cloud-based microservice for automated benchmarking of foundation and custom models.", features: "nvidia cloud benchmark automated" },
+            { name: "Azure AI Studio / Prompt Flow", description: "Microsoft's suite for LLM evaluation with built-in metrics and customizable workflows.", features: "azure microsoft metrics workflow" },
+            { name: "Weights & Biases (W&B)", description: "Experiment tracking with robust LLM evaluation features.", features: "experiment tracking evaluation" },
+            { name: "LangSmith (Anthropic)", description: "Evaluation tools with strengths in bias detection and safety testing.", features: "anthropic bias safety" },
+            { name: "TruLens", description: "Open-source framework emphasizing transparency and interpretability in LLM evaluation.", features: "opensource transparency interpretability" },
+            { name: "Vertex AI Studio (Google)", description: "Google's platform with integrated LLM evaluation tools.", features: "google cloud evaluation" },
+            { name: "DeepEval", description: "Open-source library with a wide array of evaluation metrics for easy integration.", features: "opensource metrics library" },
+            { name: "Parea AI", description: "Delivers detailed analytics and insights into LLM performance, excelling in conversation analysis.", features: "analytics insights conversation" }
+        ];
+
+        const toolsList = document.getElementById('toolsList');
+        const toolFilter = document.getElementById('toolFilter');
+
+        function renderTools(filter = "") {
+            toolsList.innerHTML = '';
+            const filteredData = toolsData.filter(t => 
+                t.name.toLowerCase().includes(filter.toLowerCase()) || 
+                t.description.toLowerCase().includes(filter.toLowerCase()) ||
+                t.features.toLowerCase().includes(filter.toLowerCase())
+            );
+            filteredData.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'p-4 border border-sky-200 rounded-lg bg-white shadow hover:shadow-lg transition-shadow';
+                card.innerHTML = `
+                    <h4 class="text-lg font-semibold text-sky-700 mb-1">${tool.name}</h4>
+                    <p class="text-sm text-slate-600">${tool.description}</p>
+                `;
+                toolsList.appendChild(card);
+            });
+        }
+        renderTools();
+        toolFilter.addEventListener('input', (e) => renderTools(e.target.value));
+
+        // Data for Evaluation Metrics Table
+        const evaluationMetricsData = [
+            { "Metric/Method": "BLEU", Type: "Automatic (Statistical)", "What it Measures": "N-gram overlap with reference", Pros: "Fast, Scalable, Objective", Cons: "Lacks semantic understanding, Not human-aligned, Poor for creative text", "Best Use Case": "Machine Translation, Initial summarization checks" },
+            { "Metric/Method": "ROUGE", Type: "Automatic (Statistical)", "What it Measures": "Overlap of n-grams, sequences, word pairs with reference (recall-focused)", Pros: "Good for summary evaluation (content overlap), Objective", Cons: "Lacks semantic understanding, Not human-aligned, Poor for creative text", "Best Use Case": "Summarization (content capture)" },
+            { "Metric/Method": "Perplexity", Type: "Automatic (Statistical)", "What it Measures": "How well a model predicts text (lower is better)", Pros: "Indicates model's 'uncertainty' on text, Quantitative", Cons: "Doesn't assess quality/coherence, Affected by tokenization, Not directly human-aligned", "Best Use Case": "Language modeling, Intrinsic model quality (less for output quality)" },
+            { "Metric/Method": "F1 Score", Type: "Automatic (Statistical)", "What it Measures": "Balances precision and recall", Pros: "Good for classification and QA, Single balanced metric", Cons: "Can be misleading if classes are imbalanced, Requires ground truth labels", "Best Use Case": "Classification, Question-Answering (exact match)" },
+            { "Metric/Method": "Accuracy", Type: "Automatic (Statistical)", "What it Measures": "Percentage of correct predictions", Pros: "Simple, Straightforward, Quantitative", Cons: "Can be misleading with imbalanced data, Doesn't capture nuance", "Best Use Case": "Classification, Multiple-choice QA" },
+            { "Metric/Method": "LLM-Derived Metrics (Embedding-based)", Type: "Automatic (LLM-based/Learned)", "What it Measures": "Semantic similarity using LLM embeddings", Pros: "Captures semantic meaning, Reference-free possible", Cons: "Can be coarse-grained, May inherit LLM biases", "Best Use Case": "Semantic similarity, Answer relevance, Coarse-grained evaluation" },
+            { "Metric/Method": "LLM-Derived Metrics (Probability-based)", Type: "Automatic (LLM-based/Learned)", "What it Measures": "Scores derived from LLM generation probabilities", Pros: "Can be flexible, Leverages LLM's internal knowledge", Cons: "Can be coarse-grained, May inherit LLM biases", "Best Use Case": "Coarse-grained evaluation, Specific probability-based tasks" },
+            { "Metric/Method": "Prompting LLMs (LLM-as-a-Judge: Absolute Scoring)", Type: "Automatic (LLM-based/Learned)", "What it Measures": "LLM assigns a single quality score", Pros: "Scalable, Flexible requirements in natural language", Cons: "Highly vulnerable to adversarial attacks, Prone to score inflation, Can inherit biases", "Best Use Case": "Initial screening, Rapid feedback (with caution)" },
+            { "Metric/Method": "Prompting LLMs (LLM-as-a-Judge: Pairwise Comparison)", Type: "Automatic (LLM-based/Learned)", "What it Measures": "LLM compares two outputs to determine which is better", Pros: "More robust than absolute scoring to attacks, Flexible", Cons: "Still exhibits mild vulnerabilities, Can inherit biases", "Best Use Case": "Benchmarking models, A/B testing outputs" },
+            { "Metric/Method": "Human Evaluation (Expert)", Type: "Human", "What it Measures": "Naturalness, Accuracy, Coherence, Relevance, Fluency, Safety, Bias (domain-specific)", Pros: "Captures subjective nuance, High fidelity, Domain-specific expertise", Cons: "Costly, Not scalable, Time-consuming", "Best Use Case": "Final quality assurance, Critical applications, Bias/safety audits" },
+            { "Metric/Method": "Human Evaluation (Crowdsourcing)", Type: "Human", "What it Measures": "Naturalness, Accuracy, Coherence, Relevance, Fluency (general)", Pros: "More scalable than expert human eval, Diverse perspectives", Cons: "Can be inconsistent, Requires careful task design and quality control", "Best Use Case": "Large-scale qualitative feedback, General user experience" }
+        ];
+        
+        const evaluationMetricsTableBody = document.getElementById('evaluationMetricsTableBody');
+        const metricModal = document.getElementById('metricModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        let currentSortMetric = { column: null, ascending: true };
+
+        function renderEvaluationMetricsTable(data) {
+            evaluationMetricsTableBody.innerHTML = '';
+            data.forEach(metric => {
+                const row = evaluationMetricsTableBody.insertRow();
+                row.insertCell().textContent = metric["Metric/Method"];
+                row.insertCell().textContent = metric.Type;
+                row.insertCell().textContent = metric["What it Measures"];
+                row.insertCell().textContent = metric["Best Use Case"];
+                row.classList.add('hover:bg-slate-100', 'cursor-pointer');
+                row.addEventListener('click', () => showMetricModal(metric));
+            });
+        }
+
+        function showMetricModal(metric) {
+            document.getElementById('modalTitle').textContent = metric["Metric/Method"];
+            document.getElementById('modalType').textContent = metric.Type;
+            document.getElementById('modalMeasures').textContent = metric["What it Measures"];
+            document.getElementById('modalPros').textContent = metric.Pros;
+            document.getElementById('modalCons').textContent = metric.Cons;
+            document.getElementById('modalUseCase').textContent = metric["Best Use Case"];
+            metricModal.classList.remove('hidden');
+        }
+
+        closeModalButton.addEventListener('click', () => metricModal.classList.add('hidden'));
+        window.addEventListener('click', (event) => {
+            if (event.target === metricModal) {
+                metricModal.classList.add('hidden');
+            }
+        });
+        
+        document.querySelectorAll('#evaluationMetricsTable th').forEach(headerCell => {
+            headerCell.addEventListener('click', () => {
+                const column = headerCell.dataset.sort;
+                const ascending = (currentSortMetric.column === column) ? !currentSortMetric.ascending : true;
+                currentSortMetric = { column, ascending };
+                const sortedData = [...evaluationMetricsData].sort((a, b) => {
+                    if (a[column] < b[column]) return ascending ? -1 : 1;
+                    if (a[column] > b[column]) return ascending ? 1 : -1;
+                    return 0;
+                });
+                renderEvaluationMetricsTable(sortedData);
+            });
+        });
+        renderEvaluationMetricsTable(evaluationMetricsData);
+
+
+        // Data for Decision Matrix Table
+        const decisionMatrixData = [
+            { Feature: "Approach", "Prompt Engineering": "Optimizes input prompts to steer model behavior; no parameter change.", RAG: "Connects LLM to external data sources; retrieves info to augment prompts.", "Fine-tuning": "Retrains pre-trained LLM on focused dataset; adjusts internal parameters." },
+            { Feature: "Primary Goal", "Prompt Engineering": "Deliver desired user-specific outputs; control model behavior.", RAG: "Provide accurate, relevant, current outputs, especially with proprietary data.", "Fine-tuning": "Improve performance in specific use cases; deep domain understanding." },
+            { Feature: "Resource Requirements (Time)", "Prompt Engineering": "Least time-consuming; can be manual.", RAG: "Moderate; requires data science expertise for pipelines.", "Fine-tuning": "Most time-consuming; requires data preparation and training." },
+            { Feature: "Resource Requirements (Compute)", "Prompt Engineering": "Low; only inference cost.", RAG: "Moderate; leverages existing databases, less training.", "Fine-tuning": "High; computationally intensive training (GPUs, memory)." },
+            { Feature: "Resource Requirements (Data)", "Prompt Engineering": "No additional data required beyond prompt.", RAG: "Requires access to structured/unstructured external data.", "Fine-tuning": "Substantial amount of high-quality, labeled data specific to task." },
+            { Feature: "Flexibility", "Prompt Engineering": "High; adaptable on-the-fly for various tasks.", RAG: "Moderate; dynamic integration of external knowledge.", "Fine-tuning": "Low; specializes model for specific tasks, less flexible for others." },
+            { Feature: "Knowledge Source", "Prompt Engineering": "In-context examples, model's pre-trained knowledge.", RAG: "External databases, real-time information retrieval.", "Fine-tuning": "Internalized through retraining on specific datasets." },
+            { Feature: "Ideal Use Case", "Prompt Engineering": "Open-ended content generation, rapid prototyping, diverse outputs.", RAG: "Customer service chatbots, applications needing current/proprietary info.", "Fine-tuning": "Deep domain-specific applications, high task-specific accuracy, behavior alignment." },
+            { Feature: "Key Limitations", "Prompt Engineering": "Limited by context window size; may struggle with complex tasks.", RAG: "Data pipeline complexity; effectiveness depends on retrieval quality.", "Fine-tuning": "Computationally intensive; requires substantial labeled data; can overfit." }
+        ];
+
+        const decisionMatrixTableBody = document.getElementById('decisionMatrixTableBody');
+        let currentSortDecision = { column: null, ascending: true };
+
+        function renderDecisionMatrixTable(data) {
+            decisionMatrixTableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = decisionMatrixTableBody.insertRow();
+                row.insertCell().textContent = item.Feature;
+                row.insertCell().innerHTML = `<div class="tooltip">${item["Prompt Engineering"]}<span class="tooltiptext">${item["Prompt Engineering"]}</span></div>`;
+                row.insertCell().innerHTML = `<div class="tooltip">${item.RAG}<span class="tooltiptext">${item.RAG}</span></div>`;
+                row.insertCell().innerHTML = `<div class="tooltip">${item["Fine-tuning"]}<span class="tooltiptext">${item["Fine-tuning"]}</span></div>`;
+            });
+        }
+        document.querySelectorAll('#decisionMatrixTable th').forEach(headerCell => {
+            headerCell.addEventListener('click', () => {
+                const columnKey = headerCell.dataset.sort;
+                const ascending = (currentSortDecision.column === columnKey) ? !currentSortDecision.ascending : true;
+                currentSortDecision = { column: columnKey, ascending };
+
+                const sortedData = [...decisionMatrixData].sort((a, b) => {
+                    const valA = a[columnKey];
+                    const valB = b[columnKey];
+                    if (valA < valB) return ascending ? -1 : 1;
+                    if (valA > valB) return ascending ? 1 : -1;
+                    return 0;
+                });
+                renderDecisionMatrixTable(sortedData);
+            });
+        });
+        renderDecisionMatrixTable(decisionMatrixData);
+
+        // Resource Comparison Chart
+        const ctxResource = document.getElementById('resourceComparisonChart').getContext('2d');
+        new Chart(ctxResource, {
+            type: 'bar',
+            data: {
+                labels: ['Time', 'Compute', 'Data'],
+                datasets: [
+                    {
+                        label: 'Prompt Engineering',
+                        data: [1, 1, 0.5], // Low, Low, None (represented as 0.5 for visibility)
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'RAG',
+                        data: [2, 2, 2], // Moderate, Moderate, Moderate
+                        backgroundColor: 'rgba(255, 159, 64, 0.6)', // Orange
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Fine-tuning',
+                        data: [3, 3, 3], // High, High, High
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)', // Green
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Relative Resource Requirement (1=Low, 3=High)' },
+                        ticks: { stepSize: 1 }
+                    }
+                },
+                plugins: {
+                    title: { display: true, text: 'Comparison of Resource Requirements' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.y !== null) {
+                                    const val = context.parsed.y;
+                                    if (val <= 1) label += 'Low';
+                                    else if (val <=2) label += 'Moderate';
+                                    else label += 'High';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Finetuning Scenarios
+        const ftScenariosData = [
+            { title: "1. Achieving Deep Domain-Specific Expertise", content: "Standard LLMs often lack nuanced understanding for specialized fields (healthcare, finance). Fine-tuning on domain-specific datasets transforms a general model into a highly specialized tool." },
+            { title: "2. Optimizing for High Task-Specific Performance and Accuracy", content: "Crucial for tasks requiring exceptional precision (sentiment analysis, QA, text classification). Fine-tuning optimizes the model for a single, well-defined job." },
+            { title: "3. Aligning Model Behavior: Reducing Bias and Enhancing Safety", content: "Carefully curated fine-tuning datasets can reduce pre-trained model biases and address harmful content generation. Preference fine-tuning aligns tone and style with user preferences." },
+            { title: "4. Leveraging Transfer Learning with Limited Labeled Data", content: "Transfers knowledge from a large pre-trained model to a new task, advantageous with limited labeled data. Accelerates training and enables adaptation with smaller datasets." }
+        ];
+        const ftScenariosContainer = document.getElementById('finetuningScenarios');
+        ftScenariosData.forEach((scenario, index) => {
+            const div = document.createElement('div');
+            const button = document.createElement('button');
+            button.className = 'accordion-button mb-1';
+            button.textContent = scenario.title + " (Show Details)";
+            button.setAttribute('data-target', `ft-scenario-${index}`);
+            const contentDiv = document.createElement('div');
+            contentDiv.id = `ft-scenario-${index}`;
+            contentDiv.className = 'accordion-content';
+            contentDiv.innerHTML = `<p>${scenario.content}</p>`;
+            
+            button.addEventListener('click', () => {
+                contentDiv.style.display = contentDiv.style.display === 'none' || contentDiv.style.display === '' ? 'block' : 'none';
+                button.textContent = contentDiv.style.display === 'block' ? `${scenario.title} (Hide Details)` : `${scenario.title} (Show Details)`;
+            });
+
+            div.appendChild(button);
+            div.appendChild(contentDiv);
+            ftScenariosContainer.appendChild(div);
+        });
+
+        // Learning Resources
+        const learningResourcesData = [
+            { type: "docs", title: "Hugging Face Transformers and PEFT Libraries", description: "Extensive documentation, blog posts, and guides on loading models, LoRA, SFTTrainer.", link: "https://huggingface.co/docs/transformers" },
+            { type: "docs", title: "OpenAI Fine-Tuning API Documentation", description: "Official guides on SFT and PFT, data format requirements (JSONL).", link: "https://platform.openai.com/docs/guides/fine-tuning" },
+            { type: "docs", title: "Google AI Gemini API Model Tuning", description: "Guides on data formats, size limitations, and tuning settings for Gemini models.", link: "https://ai.google.dev/docs/model_tuning_guidance" },
+            { type: "courses", title: "Maven: Mastering LLMs For Developers & Data Scientists", description: "End-to-end fine-tuning project experience, interactive workshops.", link: "https://maven.com/parlance-labs/llm-mastery" },
+            { type: "courses", title: "Weights & Biases: Training and fine-tuning LLMs", description: "Free 4-hour course on concepts, evaluation, data prep, LoRA, Prefix Tuning.", link: "https://wandb.ai/fully-connected/learn-llm-training" },
+            { type: "courses", title: "DataCamp: Fine-tuning LLMs Tutorials", description: "Practical tutorials, including preference fine-tuning with OpenAI tools.", link: "https://www.datacamp.com/search?q=fine-tuning%20llm" },
+            { type: "papers", title: "LoRA: Low-Rank Adaptation Of Large Language Models (Hu et al.)", description: "Foundational paper on injecting low-rank matrices for efficient fine-tuning.", link: "https://arxiv.org/abs/2106.09685" },
+            { type: "papers", title: "QLoRA: Efficient Finetuning of Quantized LLMs", description: "Details efficient fine-tuning of quantized LLMs.", link: "https://arxiv.org/abs/2305.14314" },
+            { type: "papers", title: "Parameter-Efficient Fine-Tuning for Foundation Models (Survey)", description: "Broad overview of PEFT techniques, costs, and applications.", link: "https://arxiv.org/abs/2303.15647" },
+            { type: "community", title: "Hugging Face Forums", description: "Active discussions on fine-tuning topics, dataset requirements, troubleshooting.", link: "https://discuss.huggingface.co/" },
+            { type: "community", title: "Reddit: r/learnmachinelearning & r/artificial", description: "Real-world advice, experiences, solutions for fine-tuning challenges.", link: "https://www.reddit.com/r/learnmachinelearning/" }
+        ];
+        const learningResourcesList = document.getElementById('learningResourcesList');
+        const filterButtons = document.querySelectorAll('.filter-button');
+
+        function renderLearningResources(filter = "all") {
+            learningResourcesList.innerHTML = '';
+            const filteredData = learningResourcesData.filter(r => filter === "all" || r.type === filter);
+            filteredData.forEach(resource => {
+                const card = document.createElement('div');
+                card.className = 'p-4 border border-sky-200 rounded-lg bg-white shadow';
+                card.innerHTML = `
+                    <h4 class="text-lg font-semibold text-sky-700 mb-1">${resource.title} <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">${resource.type}</span></h4>
+                    <p class="text-sm text-slate-600 mb-2">${resource.description}</p>
+                    <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:text-sky-800 hover:underline text-sm font-medium">Learn more &rarr;</a>
+                `;
+                learningResourcesList.appendChild(card);
+            });
+        }
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                renderLearningResources(button.dataset.filter);
+            });
+        });
+        renderLearningResources(); // Initial render
+
+    });
+</script>
+</body>
+</html>
