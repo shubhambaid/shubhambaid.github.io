@@ -575,3 +575,27 @@ footer {
     color: var(--gray);
     margin-bottom: 0;
 }
+
+.blog-preview {
+    background-color: #f8f9fa;
+}
+
+.read-more-btn {
+    margin-top: 1.5rem;
+    background: var(--primary);
+    color: white;
+}
+
+.view-all-posts-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.view-all-posts-btn {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.blog-grid {
+    margin-top: 4rem;
+}
