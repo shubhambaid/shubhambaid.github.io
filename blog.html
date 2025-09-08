@@ -21,6 +21,9 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            <button id="theme-toggle" class="theme-toggle-btn">
+                <i class="fas fa-moon"></i>
+            </button>
              <div class="nav-toggle">
                 <i class="fas fa-bars"></i>
             </div>
@@ -28,7 +31,7 @@
     </nav>
 
     <!-- Blog Content Section -->
-    <section id="blog" class="blog-content">
+    <section id="blog" class="blog-content fade-in-section">
         <div class="container">
             <h1 class="section-title">My Blog</h1>
             <p>Insights, articles, and thoughts on AI, Computer Vision, and technology.</p>
@@ -50,8 +53,8 @@
             <p>© 2025 Shubham Baid. All rights reserved.</p>
             <div class="social-links">
                  <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                 <a href="https://github.com/shubhambaid" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
                 <a href="mailto:shubhambaid99@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <!-- Add other social links like GitHub if available -->
             </div>
             <p>AI and Computer Vision Engineer | Builder & Generalist</p>
         </div>
@@ -77,6 +80,51 @@
                 }
                 // Don't close if clicking the Blog link when already on blog.html
             });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const moonIcon = '<i class="fas fa-moon"></i>';
+        const sunIcon = '<i class="fas fa-sun"></i>';
+
+        // Function to set the theme
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Scroll Animation
+        const sections = document.querySelectorAll('.fade-in-section');
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>

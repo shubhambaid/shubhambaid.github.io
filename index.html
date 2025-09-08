@@ -22,6 +22,9 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="llmguide.html">LLM Guide</a></li>
             </ul>
+            <button id="theme-toggle" class="theme-toggle-btn">
+                <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+            </button>
             <div class="nav-toggle">
                 <i class="fas fa-bars"></i>
             </div>
@@ -64,7 +67,7 @@
     </header>
     
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="fade-in-section">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             
@@ -99,7 +102,7 @@
     </section>
     
     <!-- Experience Section -->
-    <section id="experience" style="background-color: #f8f9fa;">
+    <section id="experience" class="fade-in-section">
         <div class="container">
             <h2 class="section-title">Work Experience</h2>
             
@@ -218,7 +221,7 @@
     </section>
 
     <!-- Publications Section -->
-    <section id="publications">
+    <section id="publications" class="fade-in-section">
         <div class="container">
             <h2 class="section-title">Publications</h2>
             <div class="projects-grid"> <!-- Reusing projects-grid for layout -->
@@ -252,14 +255,14 @@
     </section>
     
     <!-- Projects Section -->
-    <section id="projects">
+    <section id="projects" class="fade-in-section">
         <div class="container">
             <h2 class="section-title">Projects & Publications</h2>
             
             <div class="projects-grid">
                  <div class="project-card"> <!-- YetiCoach -->
-                    <div class="project-image">
-                        Ski Analysis
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">YetiCoach</h3>
@@ -273,8 +276,8 @@
                 </div>
 
                 <div class="project-card"> <!-- Aegir -->
-                    <div class="project-image">
-                        Ocean Debris AI
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Aegir - Ocean Debris AI</h3>
@@ -289,8 +292,8 @@
                 </div>
 
                 <div class="project-card"> <!-- Argus -->
-                    <div class="project-image">
-                        Disaster Response Drone
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Argus</h3>
@@ -305,8 +308,8 @@
                 </div>
 
                 <div class="project-card"> <!-- Hailey -->
-                    <div class="project-image">
-                        AI Writing Assistant
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Hailey</h3>
@@ -321,8 +324,8 @@
                 </div>
 
                 <div class="project-card"> <!-- AutoSnotBot -->
-                    <div class="project-image">
-                        Whale Snot Detection
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-droplet"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">AutoSnotBot</h3>
@@ -337,8 +340,8 @@
                 </div>
 
                 <div class="project-card"> <!-- Cap for Blind -->
-                    <div class="project-image">
-                        Assistive Tech Cap
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Cap for Blind</h3>
@@ -353,8 +356,8 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">
-                        AI Text Generation
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Text Generation Tool for Writing Assistance</h3>
@@ -368,8 +371,8 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        Medical CV
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Detection of Different Degrees of Skin Burn using YOLOv3</h3>
@@ -383,8 +386,8 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        School Safety
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">VAIA's School Safety Suite</h3>
@@ -398,8 +401,8 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        ALPR System
+                    <div class="project-image" style="text-align: center; padding: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Automatic License Plate Recognition</h3>
@@ -416,7 +419,7 @@
     </section>
     
     <!-- Education & Certifications -->
-    <section id="education" style="background-color: #f8f9fa;">
+    <section id="education" class="fade-in-section">
         <div class="container">
             <h2 class="section-title">Education & Certifications</h2>
             
@@ -511,7 +514,7 @@
     </section>
     
     <!-- Blog Section -->
-    <section id="blog-preview" class="blog-preview">
+    <section id="blog-preview" class="blog-preview fade-in-section">
         <div class="container">
             <h2 class="section-title">Latest Blog Post</h2>
             <div class="projects-grid">
@@ -562,8 +565,8 @@
             <p>© 2025 Shubham Baid. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/shubhambaid" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
                 <a href="mailto:shubhambaid99@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <!-- Add other social links like GitHub if available -->
             </div>
             <p>AI and Computer Vision Engineer | Builder & Generalist</p>
         </div>
@@ -583,6 +586,51 @@
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const moonIcon = '<i class="fas fa-moon"></i>';
+        const sunIcon = '<i class="fas fa-sun"></i>';
+
+        // Function to set the theme
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Scroll Animation
+        const sections = document.querySelectorAll('.fade-in-section');
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>

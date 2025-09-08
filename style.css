@@ -6,9 +6,30 @@
     --secondary: #6c757d;
     --light: #f8f9fa;
     --dark: #343a40;
+    --text-color: #343a40;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
     --gray: #6c757d;
     --success: #28a745;
     --gradient: linear-gradient(120deg, #007bff, #0056b3);
+    --header-text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --primary: #00aaff;
+    --primary-dark: #0077cc;
+    --secondary: #a0aec0;
+    --light: #2d3748;
+    --dark: #f7fafc;
+    --text-color: #f7fafc;
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --border-color: #4a5568;
+    --gradient: linear-gradient(120deg, #00aaff, #0077cc);
+    --header-text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -20,9 +41,10 @@
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.7;
-    color: var(--dark);
-    background-color: #ffffff;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -34,7 +56,7 @@ body {
 /* Header Styles */
 header {
     background: var(--gradient);
-    color: white;
+    color: var(--header-text-color);
     padding: 8rem 0 6rem;
     position: relative;
     overflow: hidden;
@@ -117,12 +139,12 @@ header::before {
 
 .btn-primary {
     background: var(--primary);
-    color: white;
+    color: var(--header-text-color);
 }
 
 .btn-outline {
     border: 2px solid rgba(255, 255, 255, 0.8);
-    color: white;
+    color: var(--header-text-color);
 }
 
 .btn-primary:hover {
@@ -132,7 +154,7 @@ header::before {
 }
 
 .btn-outline:hover {
-    background: white;
+    background: var(--header-text-color);
     color: var(--primary);
     transform: translateY(-3px);
 }
@@ -148,6 +170,7 @@ section {
     margin-bottom: 4rem;
     text-align: center;
     position: relative;
+    color: var(--text-color);
 }
 
 .section-title::after {
@@ -181,7 +204,7 @@ section {
 .about-image img {
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-color);
 }
 
 .skill-tags {
@@ -192,9 +215,9 @@ section {
 }
 
 .skill-tag {
-    background: #e9f5ff;
-    color: #0056b3;
-    border: 1px solid #bde0ff;
+    background: var(--light);
+    color: var(--primary-dark);
+    border: 1px solid var(--primary);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 0.9rem;
@@ -203,7 +226,7 @@ section {
 
 /* Experience Section */
 #experience {
-    background-color: #ffffff;
+    background-color: var(--bg-color);
 }
 
 .timeline {
@@ -218,7 +241,7 @@ section {
     top: 0;
     height: 100%;
     width: 2px;
-    background: #e9ecef;
+    background: var(--border-color);
 }
 
 .timeline-item {
@@ -236,7 +259,7 @@ section {
     height: 20px;
     border-radius: 50%;
     background: var(--primary);
-    border: 4px solid white;
+    border: 4px solid var(--bg-color);
     box-shadow: 0 0 0 2px var(--primary);
 }
 
@@ -287,18 +310,19 @@ section {
 }
 
 .project-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 30px var(--shadow-color);
 }
 
 .project-image {
@@ -307,7 +331,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--header-text-color);
     font-size: 1.5rem;
     background: var(--gradient);
 }
@@ -320,6 +344,7 @@ section {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
 
 .project-tags {
@@ -330,22 +355,23 @@ section {
 }
 
 .project-tag {
-    background: #f8f9fa;
+    background: var(--light);
     padding: 0.3rem 0.8rem;
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--gray);
-    border: 1px solid #dee2e6;
+    color: var(--secondary);
+    border: 1px solid var(--border-color);
 }
 
 /* Education Section */
 .education-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px var(--shadow-color);
     margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
 }
 
 .degree {
@@ -362,7 +388,7 @@ section {
 /* Contact Section */
 .contact-section {
     background: var(--dark);
-    color: white;
+    color: var(--text-color);
 }
 
 .contact-grid {
@@ -377,9 +403,10 @@ section {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 10px;
     transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .contact-info-item:hover {
@@ -399,7 +426,7 @@ section {
 /* Footer */
 footer {
     background: var(--dark);
-    color: white;
+    color: var(--text-color);
     text-align: center;
     padding: 2rem 0;
 }
@@ -415,17 +442,18 @@ footer {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--light);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: white;
+    color: var(--text-color);
     transition: background 0.3s ease;
 }
 
 .social-link:hover {
     background: var(--primary);
+    color: var(--header-text-color);
 }
 
 /* Responsive Design */
@@ -459,18 +487,18 @@ footer {
 
 /* Navigation Bar Styles */
 .navbar {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--bg-color);
     backdrop-filter: blur(10px);
     padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px var(--shadow-color);
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, background-color 0.3s;
 }
 
 .navbar:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px var(--shadow-color);
 }
 .navbar .container {
     display: flex;
@@ -496,7 +524,7 @@ footer {
 }
 .nav-menu a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0; /* Add some padding for better click area */
@@ -510,7 +538,16 @@ footer {
     cursor: pointer;
     background: none;
     border: none;
-    color: var(--dark);
+    color: var(--text-color);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 1rem;
 }
 
 /* Navigation Responsive */
@@ -522,10 +559,11 @@ footer {
         top: 60px; /* Adjust based on navbar height */
         left: 0;
         width: 100%;
-        background: white;
+        background: var(--bg-color);
         padding: 1rem 0;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px var(--shadow-color);
         gap: 0; /* Reset gap for column layout */
+        border-top: 1px solid var(--border-color);
     }
     .nav-menu.active {
         display: flex; /* Show when active */
@@ -537,7 +575,7 @@ footer {
      .nav-menu a {
         display: block; /* Make links take full width */
         padding: 1rem 0; /* Adjust padding for mobile */
-        border-bottom: 1px solid #eee; /* Optional separator */
+        border-bottom: 1px solid var(--border-color); /* Optional separator */
     }
      .nav-menu li:last-child a {
         border-bottom: none;
@@ -577,13 +615,13 @@ footer {
 }
 
 .blog-preview {
-    background-color: #f8f9fa;
+    background-color: var(--light);
 }
 
 .read-more-btn {
     margin-top: 1.5rem;
     background: var(--primary);
-    color: white;
+    color: var(--header-text-color);
 }
 
 .view-all-posts-container {
@@ -598,4 +636,16 @@ footer {
 
 .blog-grid {
     margin-top: 4rem;
+}
+
+/* Scroll Animations */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
