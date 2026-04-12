@@ -1,637 +1,1476 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubham Baid | AI & Computer Vision Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Add Font Awesome for icons -->
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="nav-logo">Shubham Baid</a>
-            <ul class="nav-menu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Shubham Baid — Senior AI Engineer</title>
+        <meta
+            name="description"
+            content="Senior AI Engineer. Building GenAI + Vision systems that ship. Edge deployments, optimized pipelines, real-world impact."
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+
+        <!-- Navbar -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">&lt;<span>SB</span>/&gt;</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="asset/Shubham_Baid.pdf" download class="nav-cv-btn"
+                        >Download CV</a
+                    >
+                    <button
+                        id="theme-btn"
+                        class="theme-btn"
+                        aria-label="Toggle theme"
+                    >
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="hamburger" id="hamburger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="mobile-nav" id="mobile-nav">
+            <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#publications">Publications</a></li>
-                <li><a href="#education">Education</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="llmguide.html">LLM Guide</a></li>
             </ul>
-            <button id="theme-toggle" class="theme-toggle-btn">
-                <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
-            </button>
-            <div class="nav-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
-    </nav>
 
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-title">
-                    <h1>Shubham Baid</h1>
-                    <p>AI and Computer Vision Engineer</p> <!-- Updated Subtitle -->
-                </div>
-                
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <h3>4+</h3>
-                        <p>Years Experience</p>
+        <!-- Hero -->
+        <section id="hero">
+            <canvas id="neural-canvas"></canvas>
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <div class="hero-label">Bengaluru, India · AI Engineer</div>
+                    <h1 class="hero-name">Shubham<br /><em>Baid</em></h1>
+                    <div class="hero-role">
+                        <span class="role-arrow">→</span>
+                        <span id="typed"></span>
+                        <span class="cursor-blink">|</span>
                     </div>
-                    <div class="stat-item">
-                        <h3>5+</h3> <!-- Updated Certifications Count -->
-                        <p>Certifications</p>
-                    </div>
-                    <a href="#publications" style="text-decoration: none; color: inherit;"> <!-- Link added -->
-                        <div class="stat-item">
-                            <h3>2</h3>
-                            <p>Publications</p>
+                    <p class="hero-tagline">
+                        Building GenAI + Vision systems that ship.<br />Edge
+                        deployments · Optimized pipelines · Real-world impact.
+                    </p>
+
+                    <div class="hero-stats">
+                        <div class="hstat">
+                            <div class="hstat-n">
+                                <span class="cnt" data-to="5">0</span>+
+                            </div>
+                            <div class="hstat-l">Years Exp.</div>
                         </div>
-                    </a>
+                        <div class="hstat">
+                            <div class="hstat-n">
+                                <span class="cnt" data-to="1500">0</span>+
+                            </div>
+                            <div class="hstat-l">Sites Deployed</div>
+                        </div>
+                        <div class="hstat">
+                            <div class="hstat-n">
+                                <span class="cnt" data-to="80">0</span>%
+                            </div>
+                            <div class="hstat-l">Bandwidth Cut</div>
+                        </div>
+                        <div class="hstat">
+                            <div class="hstat-n">
+                                2+<span
+                                    style="
+                                        font-size: 0.9rem;
+                                        font-weight: 400;
+                                        color: var(--text-2);
+                                    "
+                                    >pub</span
+                                >
+                            </div>
+                            <div class="hstat-l">1 Patent</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn-primary"
+                            ><i class="fas fa-paper-plane"></i> Get in Touch</a
+                        >
+                        <a
+                            href="asset/Shubham_Baid.pdf"
+                            download
+                            class="btn-ghost"
+                            ><i class="fas fa-download"></i> Download CV</a
+                        >
+                        <a
+                            href="https://www.linkedin.com/in/shubhambaid21"
+                            target="_blank"
+                            class="btn-icon"
+                            aria-label="LinkedIn"
+                            ><i class="fab fa-linkedin-in"></i
+                        ></a>
+                        <a
+                            href="https://github.com/shubhambaid"
+                            target="_blank"
+                            class="btn-icon"
+                            aria-label="GitHub"
+                            ><i class="fab fa-github"></i
+                        ></a>
+                        <a
+                            href="https://twitter.com/shubhamkahanhai"
+                            target="_blank"
+                            class="btn-icon"
+                            aria-label="Twitter/X"
+                            ><i class="fab fa-x-twitter"></i
+                        ></a>
+                    </div>
                 </div>
-                
-                <div class="contact-links">
-                    <a href="mailto:shubhambaid99@gmail.com" class="btn btn-primary">Get In Touch</a>
-                    <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="btn btn-outline">LinkedIn Profile</a>
-                    <a href="asset/Shubham_Baid.pdf" download="Shubham_Baid_Resume.pdf" class="btn btn-outline">Download Resume</a> <!-- Added Resume Button -->
+
+                <div class="hero-right">
+                    <div class="profile-wrap">
+                        <img
+                            src="asset/me.jpg"
+                            alt="Shubham Baid"
+                            class="profile-photo"
+                        />
+                        <div class="profile-chip">shubhambaid99@gmail.com</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    
-    <!-- About Section -->
-    <section id="about" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hey! I'm an AI and Computer Vision Engineer, driven by a passion for harnessing the limitless potential of AI to create impactful change. I specialize in developing and optimizing cutting-edge computer vision pipelines and integrating Vision Language Models (VLMs) & Large Language Models (LLMs).</p> <!-- Refined About Text -->
-                    <p>My core expertise lies in C/C++, Python, and advanced libraries like OpenCV, PyTorch, TensorFlow, and TensorRT. I thrive on building robust, efficient AI solutions and staying ahead of the curve in this rapidly evolving field.</p>
-                    <p>My work is backed by certifications including Nvidia Jetson AI Specialist, Intel Edge AI Specialist, and TensorFlow Developer, reflecting my commitment to continuous learning and practical application.</p>
-                    
-                    <div class="skill-tags">
-                        <span class="skill-tag">Computer Vision</span>
-                        <span class="skill-tag">Deep Learning</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C/C++</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">TensorRT</span>
-                        <span class="skill-tag">OpenCV</span>
-                        <span class="skill-tag">LLMs / VLMs</span>
-                        <span class="skill-tag">Generative AI</span>
-                        <span class="skill-tag">Edge AI</span>
-                        <span class="skill-tag">Model Optimization</span>
-                        <span class="skill-tag">Rapid Prototyping</span>
-                    </div>
-                </div>
-                
-                <div class="about-image">
-                    <img src="asset/me.jpg" alt="Shubham Baid Profile" /> <!-- Placeholder Image -->
-                </div>
+            <div class="scroll-hint">
+                <span>scroll</span>
+                <div class="scroll-line"></div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Experience Section -->
-    <section id="experience" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="position">AI Engineer</div>
-                            <div class="company">CAFU</div>
-                        </div>
-                        <div class="duration">January 2025 - April 2025 (4 months)</div>
-                    </div>
-                    
-                    <div class="achievements">
-                        <div class="achievement-item">
-                            Engineered agentic workflow marketing content generation powered by LLMs, delivering 15% CTR increase and 50% reduction in copywriting workflow time through automated content optimization.
-                        </div>
-                        <div class="achievement-item">
-                            Optimised machine learning-based ETA prediction system with real-time analytics, decreasing delayed fulfillment from 13% to 8% (3-month period) and reducing breaches by 42% for delays >5 minutes.
-                        </div>
-                        <div class="achievement-item">
-                            Designed automated B2B lead acquisition with autonomous agents and multi-modal LLMs, processing 1,400 prospects monthly with minimal human intervention. Generated 4 high-conversion leads while achieving 90% reduction in manual prospecting hours and substantial CAC improvement.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="position">Senior AI Engineer</div>
-                            <div class="company">Avathon</div>
-                        </div>
-                        <div class="duration">May 2022 - January 2025 (2 years 9 months)</div>
-                    </div>
-                    
-                    <div class="achievements">
-                        <div class="achievement-item">
-                            Engaged in integrating Multimodal Language Models (LLMs) to optimize traditional CV models accuracy.
-                        </div>
-                        <div class="achievement-item">
-                            Led the development of VAIA's School Safety Suite, implemented use cases including firearm detection and person re-identification across multiple cameras which is now deployed across hundreds of cameras across multiple schools in the US.
-                        </div>
-                        <div class="achievement-item">
-                            Leading a team of AI Engineers and guided them to adapt right practices for streamlined development and timely deliverables.
-                        </div>
-                        <div class="achievement-item">
-                            Designed a resource-efficient computer vision pipeline for low-power ARM hardware, optimizing for limited CPU (50%) and RAM utilising NEON and other libraries, incorporating hardware-level enhancements and model quantization.
-                        </div>
-                        <div class="achievement-item">
-                            Led the development of a gamified auto-image annotation tool, enhancing dataset preparation and model training efficiency through active learning concept.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="position">Senior Artificial Intelligence Engineer</div>
-                            <div class="company">Integration Wizards Solutions</div>
-                        </div>
-                        <div class="duration">December 2021 - May 2022 (6 months)</div>
-                    </div>
-                    
-                    <div class="achievements">
-                        <div class="achievement-item">
-                            Developed an ALPR (Automatic License Plate Recognition) module with high acceleration and minimal resource usage footprint, compatible with both high-speed CPU and GPU inference.
-                        </div>
-                        <div class="achievement-item">
-                            Worked on onboarding various computer vision models to an accelerated inference pipeline for GPUs, resulting in faster and more accurate results.
-                        </div>
-                        <div class="achievement-item">
-                            Contributed to the acquisition by Sparkcognition, a leading AI and machine learning company.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="position">Artificial Intelligence Engineer</div>
-                            <div class="company">Integration Wizards Solutions</div>
-                        </div>
-                        <div class="duration">June 2021 - December 2021 (7 months)</div>
-                    </div>
-                    
-                    <div class="achievements">
-                        <div class="achievement-item">
-                            Modified neural network architectures to optimize for specific use-cases, improving accuracy and performance.
-                        </div>
-                        <div class="achievement-item">
-                            Trained custom computer vision models at scale for warehouses, resulting in increased efficiency in HSE.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="position">Artificial Intelligence Intern</div>
-                            <div class="company">Integration Wizards Solutions</div>
-                        </div>
-                        <div class="duration">September 2020 - May 2021 (9 months)</div>
-                    </div>
-                    
-                    <div class="achievements">
-                        <div class="achievement-item">
-                            Trained backbone models for PPE detection, vehicle body-type classification, and fall-arrester detection.
-                        </div>
-                        <div class="achievement-item">
-                            Deployed computer vision solutions at scale, demonstrating a practical approach to solving complex technical challenges.
-                        </div>
-                    </div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="marquee-strip">
+            <div class="marquee-track">
+                <div class="marquee-row">
+                    <span>PyTorch</span><span class="sep">·</span>
+                    <span>TensorFlow</span><span class="sep">·</span>
+                    <span>OpenCV</span><span class="sep">·</span>
+                    <span>TensorRT</span><span class="sep">·</span>
+                    <span>CUDA</span><span class="sep">·</span>
+                    <span>Python</span><span class="sep">·</span>
+                    <span>C++</span><span class="sep">·</span> <span>YOLO</span
+                    ><span class="sep">·</span> <span>InternVL</span
+                    ><span class="sep">·</span> <span>Qwen-VL</span
+                    ><span class="sep">·</span> <span>LLaVA</span
+                    ><span class="sep">·</span> <span>CrewAI</span
+                    ><span class="sep">·</span> <span>GStreamer</span
+                    ><span class="sep">·</span> <span>DeepStream</span
+                    ><span class="sep">·</span> <span>OpenVINO</span
+                    ><span class="sep">·</span> <span>Nvidia Jetson</span
+                    ><span class="sep">·</span> <span>ARM / NEON</span
+                    ><span class="sep">·</span> <span>RAG</span
+                    ><span class="sep">·</span> <span>Hugging Face</span
+                    ><span class="sep">·</span> <span>Docker</span
+                    ><span class="sep">·</span>
+                    <!-- duplicate -->
+                    <span>PyTorch</span><span class="sep">·</span>
+                    <span>TensorFlow</span><span class="sep">·</span>
+                    <span>OpenCV</span><span class="sep">·</span>
+                    <span>TensorRT</span><span class="sep">·</span>
+                    <span>CUDA</span><span class="sep">·</span>
+                    <span>Python</span><span class="sep">·</span>
+                    <span>C++</span><span class="sep">·</span> <span>YOLO</span
+                    ><span class="sep">·</span> <span>InternVL</span
+                    ><span class="sep">·</span> <span>Qwen-VL</span
+                    ><span class="sep">·</span> <span>LLaVA</span
+                    ><span class="sep">·</span> <span>CrewAI</span
+                    ><span class="sep">·</span> <span>GStreamer</span
+                    ><span class="sep">·</span> <span>DeepStream</span
+                    ><span class="sep">·</span> <span>OpenVINO</span
+                    ><span class="sep">·</span> <span>Nvidia Jetson</span
+                    ><span class="sep">·</span> <span>ARM / NEON</span
+                    ><span class="sep">·</span> <span>RAG</span
+                    ><span class="sep">·</span> <span>Hugging Face</span
+                    ><span class="sep">·</span> <span>Docker</span
+                    ><span class="sep">·</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Publications Section -->
-    <section id="publications" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title">Publications</h2>
-            <div class="projects-grid"> <!-- Reusing projects-grid for layout -->
-                <div class="project-card"> <!-- Publication 1 -->
-                    <div class="project-content">
-                        <h3 class="project-title">Text Generation Tool for Writing Assistance using Transformer.</h3>
-                        <p>JAZ 2023, Vol 44, p938 April 1, 2023</p>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Writing assistance tool build using transformer. Submitted for publication in August 2020, apparently got approved in 2023.</p>
-                        <div class="project-tags" style="margin-top: 1rem;">
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">Transformers</span>
-                            <span class="project-tag">Generative AI</span>
-                        </div>
-                        <a href="https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fopenurl%2Eebsco%2Ecom%2FEPDB%253Agcd%253A5%253A23459157%2Fdetailv2%3Fsid%3Debsco%253Aplink%253Ascholar%26id%3Debsco%253Agcd%253A174368172%26crl%3Dc%26link_origin%3Dscholar%2Egoogle%2Ecom&urlhash=WoZS&trk=public_profile_publication-button" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; background: var(--primary); color: white;">See Publication</a>
-                    </div>
+        <!-- About -->
+        <section id="about" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">01</span>
+                    <h2 class="section-title">About</h2>
                 </div>
-                <div class="project-card"> <!-- Publication 2 -->
-                     <div class="project-content">
-                        <h3 class="project-title">Detection of Different Degrees of Skin Burn using YOLOv3</h3>
-                        <p>TEST Engineering and Management May 1, 2020</p>
-                         <div class="project-tags" style="margin-top: 1rem;">
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">YOLOv3</span>
-                            <span class="project-tag">Medical AI</span>
-                        </div>
-                        <a href="https://www.linkedin.com/redir/redirect?url=http%3A%2F%2Fwww%2Etestmagzine%2Ebiz%2Findex%2Ephp%2Ftestmagzine%2Farticle%2Fview%2F8100%2F6122&urlhash=3kfO&trk=public_profile_publication-button" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; background: var(--primary); color: white;">See Publication</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Projects Section -->
-    <section id="projects" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title">Projects & Publications</h2>
-            
-            <div class="projects-grid">
-                 <div class="project-card"> <!-- YetiCoach -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">YetiCoach</h3>
-                        <p>Developed a tool providing skiers with data on ski angles and gap at different steepness levels using only an action camera.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">Sports Tech</span>
-                            <span class="project-tag">Hackathon</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card"> <!-- Aegir -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Aegir - Ocean Debris AI</h3>
-                        <p>Platform using CV & DL on satellite/UAV data to locate, classify, and predict ocean debris trajectory, aiding cleanup efforts.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">Deep Learning</span>
-                            <span class="project-tag">Edge AI</span>
-                            <span class="project-tag">NASA Space Apps</span>
+                <div class="about-grid">
+                    <div class="about-body">
+                        <p>
+                            AI & Computer Vision Engineer with
+                            <strong>5+ years</strong> of experience building
+                            production systems across Multimodal LLMs, Computer
+                            Vision, and Edge AI. Started from internship to
+                            <strong>founding-team Lead Engineer</strong> — with
+                            a track record across safety-critical deployments,
+                            agentic automation, and hardware-constrained
+                            inference optimization.
+                        </p>
+                        <p>
+                            Has contributed to an <strong>M&A exit</strong>,
+                            deployed systems across
+                            <strong>1,500+ sites</strong> (schools, warehouses,
+                            and more), won tracks at Europe's largest hackathon
+                            and NASA Space Apps, holds
+                            <strong>2 publications and a patent</strong>, and is
+                            currently building autonomous manufacturing planning
+                            systems at a pre-seed stealth startup.
+                        </p>
+                        <p>
+                            Core philosophy: rapid prototyping, rigorous
+                            real-world testing, and keeping an eye on how models
+                            perform under deployment constraints — not just
+                            benchmarks. Founded and led
+                            <strong
+                                >Google Developer Student Club (GDSC)
+                                REVA</strong
+                            >
+                            during undergrad.
+                        </p>
+                        <div class="tag-cloud">
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Multimodal LLMs</span>
+                            <span class="tag">Agentic AI</span>
+                            <span class="tag">Edge AI</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">TensorRT</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">CUDA / NEON</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">C/C++</span>
+                            <span class="tag">Model Optimization</span>
+                            <span class="tag">Active Learning</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="project-card"> <!-- Argus -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Argus</h3>
-                        <p>Autonomous drone system using DL & CV to generate critical data (locality density, population estimates, depth data) for natural disaster areas.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Deep Learning</span>
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">UAV</span>
-                            <span class="project-tag">Disaster Tech</span>
+                    <div class="about-aside">
+                        <div class="aside-block">
+                            <div class="aside-label">Quick Stats</div>
+                            <div class="aside-row">
+                                <span class="aside-row-label">Experience</span
+                                ><span class="aside-row-val">5+ years</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label"
+                                    >Sites Deployed</span
+                                ><span class="aside-row-val">1,500+</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label">Publications</span
+                                ><span class="aside-row-val">2</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label">Patent</span
+                                ><span class="aside-row-val">1</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label"
+                                    >Certifications</span
+                                ><span class="aside-row-val">5</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label"
+                                    >Hackathon wins</span
+                                ><span class="aside-row-val">2 tracks</span>
+                            </div>
+                            <div class="aside-row">
+                                <span class="aside-row-label">Location</span
+                                ><span class="aside-row-val"
+                                    >Bengaluru, India</span
+                                >
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-card"> <!-- Hailey -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Hailey</h3>
-                        <p>AI-based writing assistant leveraging Hugging Face Transformers and GPT-2 for text generation and sentence completion.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">Transformers</span>
-                            <span class="project-tag">GPT-2</span>
-                            <span class="project-tag">Generative AI</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card"> <!-- AutoSnotBot -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-droplet"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AutoSnotBot</h3>
-                        <p>Automated drone using custom YOLO model to detect whales and collect snot samples for algal bloom prediction.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Object Detection</span>
-                            <span class="project-tag">YOLO</span>
-                            <span class="project-tag">UAV</span>
-                            <span class="project-tag">Environmental AI</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card"> <!-- Cap for Blind -->
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Cap for Blind</h3>
-                        <p>Arduino-based cap with ultrasonic sensors providing haptic feedback to assist visually impaired individuals.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Arduino</span>
-                            <span class="project-tag">IoT</span>
-                            <span class="project-tag">Assistive Tech</span>
-                            <span class="project-tag">Hardware</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Text Generation Tool for Writing Assistance</h3>
-                        <p>Developed a transformer-based text generation tool to assist with writing tasks, improving content creation efficiency.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">Transformers</span>
-                            <span class="project-tag">Publication</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Detection of Different Degrees of Skin Burn using YOLOv3</h3>
-                        <p>Implemented YOLOv3 architecture to accurately detect and classify different degrees of skin burns, aiding medical diagnosis.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">YOLO</span>
-                            <span class="project-tag">Medical AI</span>
-                            <span class="project-tag">Publication</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">VAIA's School Safety Suite</h3>
-                        <p>Led development of comprehensive safety monitoring system with firearm detection and person re-identification across multiple cameras.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Object Detection</span>
-                            <span class="project-tag">Re-ID</span>
-                            <span class="project-tag">Production</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image" style="text-align: center; padding: 1rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Automatic License Plate Recognition</h3>
-                        <p>Developed high-performance ALPR module with minimal resource footprint for both CPU and GPU inference.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">OCR</span>
-                            <span class="project-tag">Optimization</span>
-                            <span class="project-tag">Production</span>
+                        <div class="aside-block">
+                            <div class="aside-label">Links</div>
+                            <div class="aside-links">
+                                <a
+                                    href="https://www.linkedin.com/in/shubhambaid21"
+                                    target="_blank"
+                                    class="aside-link"
+                                    ><i class="fab fa-linkedin-in"></i>
+                                    LinkedIn</a
+                                >
+                                <a
+                                    href="https://github.com/shubhambaid"
+                                    target="_blank"
+                                    class="aside-link"
+                                    ><i class="fab fa-github"></i> GitHub</a
+                                >
+                                <a
+                                    href="https://twitter.com/shubhamkahanhai"
+                                    target="_blank"
+                                    class="aside-link"
+                                    ><i class="fab fa-x-twitter"></i> Twitter</a
+                                >
+                                <a
+                                    href="https://shubhambaid.medium.com"
+                                    target="_blank"
+                                    class="aside-link"
+                                    ><i class="fab fa-medium"></i> Medium</a
+                                >
+                                <a
+                                    href="mailto:shubhambaid99@gmail.com"
+                                    class="aside-link"
+                                    ><i class="fas fa-envelope"></i> Email</a
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Education & Certifications -->
-    <section id="education" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title">Education & Certifications</h2>
-            
-            <div class="education-card">
-                <div class="degree">Bachelor of Technology (BTech), Computer Science</div>
-                <div class="university">REVA University</div>
-                <div class="duration">2017 - 2021</div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">02</span>
+                    <h2 class="section-title">Experience</h2>
+                </div>
+                <div class="exp-table">
+                    <div class="exp-row">
+                        <div class="exp-date">
+                            <div class="exp-date-co">Stealth Startup</div>
+                            <div class="exp-date-type">
+                                Applied AI · Pre-Seed
+                            </div>
+                            <div class="exp-date-range">
+                                Apr 2025<br />Present
+                            </div>
+                        </div>
+                        <div class="exp-content">
+                            <div class="exp-role">
+                                Lead AI Engineer — Founding Team
+                            </div>
+                            <ul class="exp-bullets">
+                                <li>
+                                    Designing and orchestrating highly-scaled
+                                    multi-agent systems for complex planning and
+                                    data extraction workflows — reducing
+                                    end-to-end decision and logic building
+                                    cycles from
+                                    <span class="metric">hours → minutes</span>.
+                                </li>
+                                <li>
+                                    Developed a perceptual compression scheme
+                                    decoupling human-visual fidelity from
+                                    machine-interpretable signal retention:
+                                    <span class="metric">80% bandwidth ↓</span>
+                                    with 99% task-relevant semantic preservation
+                                    for downstream VLM inference.
+                                </li>
+                                <li>
+                                    Built end-to-end streaming pipeline: Encode
+                                    → Stream → Decode → VLM forward pass, with
+                                    robust CPU/GPU fallback for edge devices.
+                                </li>
+                                <li>
+                                    Benchmarked LLaVA, Qwen-VL, and custom
+                                    models for
+                                    <span class="metric"
+                                        >throughput-per-watt</span
+                                    >
+                                    on edge hardware.
+                                </li>
+                            </ul>
+                            <div class="exp-tags">
+                                <span>Multi-agent AI</span><span>VLMs</span
+                                ><span>Edge Streaming</span><span>CrewAI</span
+                                ><span>LLaVA</span><span>Qwen-VL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-row">
+                        <div class="exp-date">
+                            <div class="exp-date-co">CAFU</div>
+                            <div class="exp-date-type">
+                                Fuel Delivery Tech · Dubai
+                            </div>
+                            <div class="exp-date-range">
+                                Jan 2025<br />Apr 2025
+                            </div>
+                        </div>
+                        <div class="exp-content">
+                            <div class="exp-role">AI Engineer</div>
+                            <ul class="exp-bullets">
+                                <li>
+                                    Designed LLM-based agentic content
+                                    generation workflows →
+                                    <span class="metric">+15% CTR</span>, −50%
+                                    manual copywriting time.
+                                </li>
+                                <li>
+                                    Optimised ML-based ETA prediction system →
+                                    reduced delayed fulfillment from 13% to 8%,
+                                    cutting breaches (&gt;5 min) by
+                                    <span class="metric">42%</span> over 3
+                                    months.
+                                </li>
+                                <li>
+                                    Built autonomous B2B lead pipeline
+                                    processing
+                                    <span class="metric"
+                                        >1,400+ prospects/mo</span
+                                    >
+                                    → 90% reduction in manual prospecting hours,
+                                    improved CAC, 4 high-conversion leads
+                                    generated.
+                                </li>
+                            </ul>
+                            <div class="exp-tags">
+                                <span>Agentic AI</span><span>LLMs</span
+                                ><span>ML Optimization</span><span>Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-row">
+                        <div class="exp-date">
+                            <div class="exp-date-co">Avathon</div>
+                            <div class="exp-date-type">
+                                Formerly SparkCognition
+                            </div>
+                            <div class="exp-date-range">
+                                May 2022<br />Jan 2025
+                            </div>
+                        </div>
+                        <div class="exp-content">
+                            <div class="exp-role">Senior AI Engineer</div>
+                            <ul class="exp-bullets">
+                                <li>
+                                    Led deployment of VAIA School Safety Suite
+                                    (firearm detection, person Re-ID) across
+                                    <span class="metric">100+ cameras</span> in
+                                    US schools — real-time at scale.
+                                </li>
+                                <li>
+                                    Integrated Multimodal LLMs into traditional
+                                    CV pipelines to handle complex edge cases.
+                                </li>
+                                <li>
+                                    Engineered CV pipelines for low-power ARM
+                                    hardware using NEON instruction sets + model
+                                    quantization →
+                                    <span class="metric">50% CPU ↓</span>.
+                                </li>
+                                <li>
+                                    Led development of a gamified auto-image
+                                    annotation tool using active learning —
+                                    accelerated dataset prep velocity
+                                    significantly.
+                                </li>
+                                <li>
+                                    Managed and mentored a team of AI engineers.
+                                </li>
+                            </ul>
+                            <div class="exp-tags">
+                                <span>Computer Vision</span><span>TensorRT</span
+                                ><span>NEON</span><span>Multimodal LLMs</span
+                                ><span>Team Lead</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-row">
+                        <div class="exp-date">
+                            <div class="exp-date-co">Integration Wizards</div>
+                            <div class="exp-date-type">
+                                Acquired by SparkCognition
+                            </div>
+                            <div class="exp-date-range">
+                                Sep 2020<br />May 2022
+                            </div>
+                        </div>
+                        <div class="exp-content">
+                            <div class="exp-role">
+                                Sr. AI Engineer → AI Engineer → Intern
+                            </div>
+                            <ul class="exp-bullets">
+                                <li>
+                                    Developed ALPR system —
+                                    <span class="metric">SOTA 2021</span>,
+                                    hybrid CPU/GPU inference, real-time capable.
+                                </li>
+                                <li>
+                                    Migrated legacy CV models to NVIDIA
+                                    DeepStream + TensorRT GPU pipelines —
+                                    substantially reduced inference latency.
+                                </li>
+                                <li>
+                                    Built custom detection models: PPE
+                                    detection, fall arrester detection, vehicle
+                                    body-type classification for industrial
+                                    safety.
+                                </li>
+                                <li>
+                                    Core AI technology contributed to the
+                                    company's
+                                    <span class="metric">M&A exit</span> —
+                                    acquired by SparkCognition.
+                                </li>
+                            </ul>
+                            <div class="exp-tags">
+                                <span>ALPR</span><span>DeepStream</span
+                                ><span>TensorRT</span><span>PPE Detection</span
+                                ><span>Edge AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Professional Certifications</h3>
-            
-            <div class="projects-grid">
-                 <div class="project-card"> <!-- Added Intel Cert -->
-                    <div class="project-content">
-                        <h3 class="project-title">Intel Edge AI Certification</h3>
-                        <p>Certification focused on optimizing and deploying AI solutions on Intel hardware for edge computing.</p>
-                    </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">03</span>
+                    <h2 class="section-title">Skills</h2>
                 </div>
-               <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Nvidia Jetson AI Specialist</h3>
-                        <p>Specialized certification in deploying AI models on edge devices using Nvidia Jetson platform</p>
+                <div class="skills-layout">
+                    <div class="skill-group">
+                        <div class="sg-head">
+                            <i class="fas fa-eye"></i>
+                            <h3>Computer Vision</h3>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>Object Detection (YOLO, SSD)</span
+                                ><span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>OpenCV / Image Processing</span
+                                ><span>96%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="96"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>Person Re-ID & Multi-cam Tracking</span
+                                ><span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="88"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">TensorFlow Developer Certificate</h3>
-                        <p>Professional certification in building and training neural networks using TensorFlow</p>
+                    <div class="skill-group">
+                        <div class="sg-head">
+                            <i class="fas fa-brain"></i>
+                            <h3>Deep Learning</h3>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>PyTorch</span><span>93%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="93"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>TensorFlow / Keras</span><span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>Model Architecture Design</span
+                                ><span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="88"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Convolutional Neural Networks</h3>
-                        <p>Advanced training in CNN architectures and computer vision applications (Coursera)</p>
+                    <div class="skill-group">
+                        <div class="sg-head">
+                            <i class="fas fa-robot"></i>
+                            <h3>LLMs & Generative AI</h3>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>Agentic Workflows (CrewAI)</span
+                                ><span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>Multimodal LLMs (VLMs)</span
+                                ><span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>RAG Pipelines</span><span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="85"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Neural Networks and Deep Learning</h3>
-                        <p>Comprehensive certification in neural network fundamentals and deep learning techniques (Coursera)</p>
+                    <div class="skill-group">
+                        <div class="sg-head">
+                            <i class="fas fa-microchip"></i>
+                            <h3>Edge AI & Optimization</h3>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>TensorRT / CUDA</span><span>91%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="91"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>ARM / NEON Optimization</span
+                                ><span>87%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="87"></div>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-top">
+                                <span>NVIDIA Jetson / DeepStream</span
+                                ><span>92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="92"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Awards & Recognition</h3>
-            
-            <div class="projects-grid">
-                 <div class="project-card"> <!-- Added Hack Zurich -->
-                    <div class="project-content">
-                        <h3 class="project-title">Track Winner - Hack Zurich 2022</h3>
-                        <p>Awarded for winning a specific track at Europe's largest hackathon.</p>
-                    </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">04</span>
+                    <h2 class="section-title">Projects</h2>
                 </div>
-                 <div class="project-card"> <!-- Added NASA Space Apps 2022 -->
-                    <div class="project-content">
-                        <h3 class="project-title">Track Winner - NASA Space Apps 2022</h3>
-                        <p>Recognized for winning a track in the international NASA hackathon.</p>
-                    </div>
+                <div class="filter-row">
+                    <button class="flt on" data-f="all">All</button>
+                    <button class="flt" data-f="cv">Computer Vision</button>
+                    <button class="flt" data-f="llm">LLM / GenAI</button>
+                    <button class="flt" data-f="hackathon">Hackathon</button>
+                    <button class="flt" data-f="production">Production</button>
                 </div>
-               <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Best Outgoing Student - 2021</h3>
-                        <p>Recognized for academic excellence and contributions to REVA University</p>
+                <div class="proj-grid" id="proj-grid">
+                    <div class="proj-card" data-cat="production cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="proj-badge badge-prod"
+                                >Production</span
+                            >
+                        </div>
+                        <h3>VAIA School Safety Suite</h3>
+                        <p>
+                            Led development of multi-camera safety system with
+                            firearm detection and person re-ID. Deployed across
+                            100+ cameras in US schools in real-time.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Object Detection</span
+                            ><span>Person Re-ID</span><span>Multi-camera</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Hackfest 2019</h3>
-                        <p>2nd Prize in National Level Hackathon conducted by REVA University</p>
+
+                    <div class="proj-card" data-cat="hackathon cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <span class="proj-badge badge-hack"
+                                >HackZurich 2021 🏆</span
+                            >
+                        </div>
+                        <h3>YetiCoach</h3>
+                        <p>
+                            Real-time ski coaching from action camera footage
+                            only — analyzes ski angles, gap, and technique. Won
+                            Sunrise GMBH, Huawei & Swisski track.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Computer Vision</span><span>Sports Tech</span
+                            ><span>Python</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Sentinal Hack 2.0</h3>
-                        <p>2nd position at State Level Hackathon conducted by KSIT</p>
+
+                    <div class="proj-card" data-cat="hackathon cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <span class="proj-badge badge-hack"
+                                >NASA 2021 🏆</span
+                            >
+                        </div>
+                        <h3>Aegir — Ocean Debris AI</h3>
+                        <p>
+                            CV & deep learning platform on satellite/UAV imagery
+                            to locate, classify, and predict ocean debris
+                            trajectory for cleanup coordination.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Deep Learning</span><span>Satellite</span
+                            ><span>Edge AI</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Galactic Problem Solver</h3>
-                        <p>Two-time recipient (2019, 2020) for completing NASA Space Apps challenges.</p>
+
+                    <div class="proj-card" data-cat="hackathon cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-helicopter"></i>
+                            </div>
+                        </div>
+                        <h3>Argus</h3>
+                        <p>
+                            Autonomous drone system generating critical
+                            disaster-zone data: locality density, population
+                            estimates, depth maps for responder coordination.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Deep Learning</span><span>UAV</span
+                            ><span>Disaster Tech</span>
+                        </div>
+                    </div>
+
+                    <div class="proj-card" data-cat="cv hackathon">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                        </div>
+                        <h3>AutoSnotBot</h3>
+                        <p>
+                            Drone with custom YOLO model detecting whales from
+                            aerial footage and autonomously collecting snot
+                            samples for algal bloom prediction research.
+                        </p>
+                        <div class="proj-tags">
+                            <span>YOLO</span><span>UAV</span
+                            ><span>DeepStream</span>
+                        </div>
+                    </div>
+
+                    <div class="proj-card" data-cat="llm">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-pen-nib"></i>
+                            </div>
+                        </div>
+                        <h3>Hailey — AI Writing Assistant</h3>
+                        <p>
+                            AI writing assistant using Hugging Face Transformers
+                            + GPT-2 for contextual text generation and sentence
+                            completion.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Transformers</span><span>GPT-2</span
+                            ><span>NLP</span>
+                        </div>
+                    </div>
+
+                    <div class="proj-card" data-cat="production cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <span class="proj-badge badge-prod"
+                                >Production</span
+                            >
+                        </div>
+                        <h3>Automatic License Plate Recognition</h3>
+                        <p>
+                            SOTA 2021 ALPR module with minimal resource
+                            footprint, hybrid CPU/GPU inference paths, real-time
+                            deployment-ready.
+                        </p>
+                        <div class="proj-tags">
+                            <span>OCR</span><span>TensorRT</span
+                            ><span>GPU Inference</span>
+                        </div>
+                    </div>
+
+                    <div class="proj-card" data-cat="cv">
+                        <div class="proj-top">
+                            <div class="proj-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                        <h3>Cap for Blind</h3>
+                        <p>
+                            Arduino-based wearable with ultrasonic sensors
+                            providing haptic feedback to assist visually
+                            impaired individuals in navigation.
+                        </p>
+                        <div class="proj-tags">
+                            <span>Arduino</span><span>IoT</span
+                            ><span>Assistive Tech</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Blog Section -->
-    <section id="blog-preview" class="blog-preview fade-in-section">
-        <div class="container">
-            <h2 class="section-title">Latest Blog Post</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Make your Deep Learning models infer at Minato speed in Python.</h3>
-                        <p>Published on: Sun, 02 May 2021</p>
-                        <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c?source=rss-4cf916ccabe8------2" target="_blank" class="btn btn-primary read-more-btn">Read More</a>
+        </section>
+
+        <!-- Publications & Patent -->
+        <section id="publications" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">05</span>
+                    <h2 class="section-title">Publications & Patent</h2>
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        <div class="pub-num">01</div>
+                        <div class="pub-body">
+                            <div class="pub-venue">
+                                JAZ 2023 · Vol 44, p938 · April 2023
+                            </div>
+                            <h3>
+                                Text Generation Tool for Writing Assistance
+                                using Transformer
+                            </h3>
+                            <p>
+                                Transformer-based writing assistance system.
+                                Submitted August 2020, published April 2023.
+                            </p>
+                            <div class="pub-tags">
+                                <span>NLP</span><span>Transformers</span
+                                ><span>Generative AI</span>
+                            </div>
+                            <a
+                                href="https://openurl.ebsco.com/EPDB%3Agcd%3A5%3A23459157/detailv2?sid=ebsco%3Aplink%3Ascholar&id=ebsco%3Agcd%3A174368172&crl=c"
+                                target="_blank"
+                                class="pub-link"
+                                >Read Paper <i class="fas fa-arrow-right"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="pub-item">
+                        <div class="pub-num">02</div>
+                        <div class="pub-body">
+                            <div class="pub-venue">
+                                TEST Engineering & Management · May 2020
+                            </div>
+                            <h3>
+                                Detection of Different Degrees of Skin Burn
+                                using YOLOv3
+                            </h3>
+                            <p>
+                                YOLOv3-based model for accurate detection and
+                                classification of skin burn severity to aid
+                                medical diagnosis.
+                            </p>
+                            <div class="pub-tags">
+                                <span>Computer Vision</span><span>YOLOv3</span
+                                ><span>Medical AI</span>
+                            </div>
+                            <a
+                                href="http://www.testmagzine.biz/index.php/testmagzine/article/view/8100/6122"
+                                target="_blank"
+                                class="pub-link"
+                                >Read Paper <i class="fas fa-arrow-right"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="pub-item">
+                        <div class="pub-num">
+                            <i
+                                class="fas fa-certificate"
+                                style="
+                                    color: var(--accent-text);
+                                    font-size: 0.8rem;
+                                "
+                            ></i>
+                        </div>
+                        <div class="pub-body">
+                            <div class="pub-venue">
+                                Patent · Transformer Writing Assistance System
+                            </div>
+                            <h3>
+                                System and Method for Text Generation Tool for
+                                Writing Assistance Using Transformer
+                            </h3>
+                            <p>
+                                Patent on the transformer writing assistance
+                                system — same work independently published
+                                academically, demonstrating both research depth
+                                and IP value.
+                            </p>
+                            <div class="patent-badge">
+                                <i class="fas fa-shield-alt"></i> Patent Holder
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="view-all-posts-container">
-                <a href="blog.html" class="btn btn-outline view-all-posts-btn">View All Posts</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            
-            <div class="contact-grid">
-                <div class="contact-info-item">
-                    <div class="contact-icon">✉️</div>
-                    <h3>Email</h3>
-                    <p><a href="mailto:shubhambaid99@gmail.com" class="contact-link">shubhambaid99@gmail.com</a></p>
+        <!-- Education & Awards -->
+        <section id="education" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">06</span>
+                    <h2 class="section-title">Education & Recognition</h2>
                 </div>
-                
-                <div class="contact-info-item">
-                    <div class="contact-icon"><i class="fab fa-linkedin"></i></div> <!-- Using Font Awesome Icon -->
-                    <h3>LinkedIn</h3>
-                    <p><a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="contact-link">linkedin.com/in/shubhambaid21</a></p>
-                </div>
-                
-                <div class="contact-info-item">
-                    <div class="contact-icon">🤝</div>
-                    <h3>Let's Collaborate</h3>
-                    <p>Open to discussing AI projects and opportunities</p>
+                <div class="creds-grid">
+                    <div>
+                        <div class="cred-block" style="margin-bottom: 1.5rem">
+                            <div class="cred-block-head">Education</div>
+                            <div class="cred-row">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div>
+                                    <strong>B.Tech, Computer Science</strong>
+                                    <span>REVA University · 2017 – 2021</span>
+                                    <span
+                                        style="
+                                            margin-top: 0.2rem;
+                                            color: var(--accent-text);
+                                            font-size: 0.72rem;
+                                        "
+                                        >Best Outgoing Student · Founded GDSC
+                                        REVA</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cred-block">
+                            <div class="cred-block-head">Certifications</div>
+                            <div class="cred-row">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong>NVIDIA Jetson AI Specialist</strong
+                                    ><span
+                                        >Edge AI deployment on Jetson
+                                        hardware</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="cred-row">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong>Intel Edge AI Specialist</strong
+                                    ><span
+                                        >AI optimization on Intel hardware</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="cred-row">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong
+                                        >TensorFlow Developer
+                                        Certificate</strong
+                                    ><span>Google-certified TF expertise</span>
+                                </div>
+                            </div>
+                            <div class="cred-row">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong
+                                        >Convolutional Neural Networks</strong
+                                    ><span>deeplearning.ai / Coursera</span>
+                                </div>
+                            </div>
+                            <div class="cred-row">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <strong
+                                        >Neural Networks & Deep Learning</strong
+                                    ><span>deeplearning.ai / Coursera</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cred-block">
+                        <div class="cred-block-head">Awards & Recognition</div>
+                        <div class="award-row">
+                            <span class="aw-icon">🏆</span>
+                            <div class="aw-body">
+                                <strong>Track Winner — HackZurich 2021</strong
+                                ><span
+                                    >Europe's largest hackathon · YetiCoach
+                                    (Sunrise GMBH, Huawei & Swisski track)</span
+                                >
+                            </div>
+                        </div>
+                        <div class="award-row">
+                            <span class="aw-icon">🚀</span>
+                            <div class="aw-body">
+                                <strong
+                                    >Track Winner — NASA Space Apps 2021</strong
+                                ><span
+                                    >International NASA hackathon · Project
+                                    Aegir</span
+                                >
+                            </div>
+                        </div>
+                        <div class="award-row">
+                            <span class="aw-icon">⭐</span>
+                            <div class="aw-body">
+                                <strong>Best Outgoing Student 2021</strong
+                                ><span>REVA University</span>
+                            </div>
+                        </div>
+                        <div class="award-row">
+                            <span class="aw-icon">🌌</span>
+                            <div class="aw-body">
+                                <strong>NASA Galactic Problem Solver × 2</strong
+                                ><span>2019 & 2020 — NASA Space Apps</span>
+                            </div>
+                        </div>
+                        <div class="award-row">
+                            <span class="aw-icon">🥈</span>
+                            <div class="aw-body">
+                                <strong>2nd Place — Hackfest 2019</strong
+                                ><span>National Level · REVA University</span>
+                            </div>
+                        </div>
+                        <div class="award-row">
+                            <span class="aw-icon">🥈</span>
+                            <div class="aw-body">
+                                <strong>2nd Place — Sentinal Hack 2.0</strong
+                                ><span>State Level · KSIT</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 Shubham Baid. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/shubhambaid" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="mailto:shubhambaid99@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section reveal">
+            <div class="container">
+                <div class="section-meta">
+                    <span class="section-num">07</span>
+                    <h2 class="section-title">Contact</h2>
+                </div>
+                <div class="contact-layout">
+                    <div>
+                        <p class="contact-lead">
+                            I'm interested in senior AI/ML engineering roles,
+                            technical collaborations, and research that pushes
+                            what's possible at the intersection of vision and
+                            language. If you have something worth discussing —
+                            reach out.
+                        </p>
+                        <div class="contact-links">
+                            <a
+                                href="mailto:shubhambaid99@gmail.com"
+                                class="clink"
+                                ><i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong
+                                    ><span>shubhambaid99@gmail.com</span>
+                                </div></a
+                            >
+                            <a
+                                href="https://www.linkedin.com/in/shubhambaid21"
+                                target="_blank"
+                                class="clink"
+                                ><i class="fab fa-linkedin-in"></i>
+                                <div>
+                                    <strong>LinkedIn</strong
+                                    ><span>linkedin.com/in/shubhambaid21</span>
+                                </div></a
+                            >
+                            <a
+                                href="https://twitter.com/shubhamkahanhai"
+                                target="_blank"
+                                class="clink"
+                                ><i class="fab fa-x-twitter"></i>
+                                <div>
+                                    <strong>Twitter / X</strong
+                                    ><span>@shubhamkahanhai</span>
+                                </div></a
+                            >
+                            <a
+                                href="https://github.com/shubhambaid"
+                                target="_blank"
+                                class="clink"
+                                ><i class="fab fa-github"></i>
+                                <div>
+                                    <strong>GitHub</strong
+                                    ><span>github.com/shubhambaid</span>
+                                </div></a
+                            >
+                        </div>
+                    </div>
+                    <div class="contact-cta">
+                        <p class="cta-note">
+                            Response time: usually within 24 hours.<br />Based
+                            in Bengaluru, India — open to remote-first roles
+                            globally.
+                        </p>
+                        <a
+                            href="mailto:shubhambaid99@gmail.com"
+                            class="btn-primary"
+                            ><i class="fas fa-paper-plane"></i> Send a
+                            Message</a
+                        >
+                        <a
+                            href="asset/Shubham_Baid.pdf"
+                            download
+                            class="btn-ghost"
+                            ><i class="fas fa-download"></i> Download CV</a
+                        >
+                    </div>
+                </div>
             </div>
-            <p>AI and Computer Vision Engineer | Builder & Generalist</p>
-        </div>
-    </footer>
+        </section>
 
-    <script>
-        // Basic mobile nav toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="footer-logo">&lt;<span>SB</span>/&gt;</div>
+                    <span class="footer-copy"
+                        >© 2025 Shubham Baid · Senior AI Engineer</span
+                    >
+                    <div class="footer-socials">
+                        <a
+                            href="https://www.linkedin.com/in/shubhambaid21"
+                            target="_blank"
+                            aria-label="LinkedIn"
+                            ><i class="fab fa-linkedin-in"></i
+                        ></a>
+                        <a
+                            href="https://github.com/shubhambaid"
+                            target="_blank"
+                            aria-label="GitHub"
+                            ><i class="fab fa-github"></i
+                        ></a>
+                        <a
+                            href="https://twitter.com/shubhamkahanhai"
+                            target="_blank"
+                            aria-label="Twitter"
+                            ><i class="fab fa-x-twitter"></i
+                        ></a>
+                        <a
+                            href="https://shubhambaid.medium.com"
+                            target="_blank"
+                            aria-label="Medium"
+                            ><i class="fab fa-medium"></i
+                        ></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        <script>
+            // =====================
+            // NEURAL CANVAS (very subtle — texture only)
+            // =====================
+            const canvas = document.getElementById("neural-canvas");
+            const ctx = canvas.getContext("2d");
+            let nodes = [],
+                mouse = { x: null, y: null };
 
-        // Close nav when a link is clicked (optional)
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const moonIcon = '<i class="fas fa-moon"></i>';
-        const sunIcon = '<i class="fas fa-sun"></i>';
-
-        // Function to set the theme
-        function setTheme(theme) {
-            body.setAttribute('data-theme', theme);
-            themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-            localStorage.setItem('theme', theme);
-        }
-
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(savedTheme);
-
-        // Toggle theme on button click
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
-        // Scroll Animation
-        const sections = document.querySelectorAll('.fade-in-section');
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+            function init() {
+                nodes = [];
+                for (let i = 0; i < 55; i++) {
+                    nodes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.22,
+                        vy: (Math.random() - 0.5) * 0.22,
+                    });
                 }
-            });
-        }, options);
+            }
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-</body>
+            function drawCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const dark =
+                    document.documentElement.getAttribute("data-theme") ===
+                    "dark";
+                const nodeAlpha = dark ? 0.18 : 0.09;
+                const lineAlpha = dark ? 0.07 : 0.045;
+                const color = dark ? "100,110,200" : "60,60,120";
+
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x,
+                            dy = nodes[i].y - nodes[j].y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 130) {
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.strokeStyle = `rgba(${color},${lineAlpha * (1 - d / 130)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.beginPath();
+                    ctx.arc(nodes[i].x, nodes[i].y, 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${color},${nodeAlpha})`;
+                    ctx.fill();
+                }
+            }
+
+            function tick() {
+                nodes.forEach((n) => {
+                    n.x += n.vx;
+                    n.y += n.vy;
+                    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+                    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+                });
+                drawCanvas();
+                requestAnimationFrame(tick);
+            }
+
+            window.addEventListener("resize", () => {
+                resize();
+                init();
+            });
+            resize();
+            init();
+            tick();
+
+            // =====================
+            // TYPEWRITER
+            // =====================
+            const roles = [
+                "Computer Vision Engineer",
+                "Multimodal LLM Builder",
+                "Edge AI Specialist",
+                "Agentic AI Developer",
+                "Deep Learning Engineer",
+            ];
+            let ri = 0,
+                ci = 0,
+                del = false;
+            const typedEl = document.getElementById("typed");
+            function type() {
+                const c = roles[ri];
+                typedEl.textContent = del
+                    ? c.slice(0, ci - 1)
+                    : c.slice(0, ci + 1);
+                del ? ci-- : ci++;
+                let t = del ? 50 : 90;
+                if (!del && ci === c.length) {
+                    t = 2200;
+                    del = true;
+                } else if (del && ci === 0) {
+                    del = false;
+                    ri = (ri + 1) % roles.length;
+                    t = 350;
+                }
+                setTimeout(type, t);
+            }
+            setTimeout(type, 700);
+
+            // =====================
+            // COUNTERS
+            // =====================
+            function runCount(el) {
+                const target = +el.dataset.to,
+                    dur = 1600,
+                    step = target / (dur / 16);
+                let cur = 0;
+                const t = setInterval(() => {
+                    cur += step;
+                    if (cur >= target) {
+                        el.textContent = target;
+                        clearInterval(t);
+                    } else el.textContent = Math.floor(cur);
+                }, 16);
+            }
+            new IntersectionObserver(
+                (ents) => {
+                    ents.forEach((e) => {
+                        if (e.isIntersecting)
+                            e.target.querySelectorAll(".cnt").forEach(runCount);
+                    });
+                },
+                { threshold: 0.5 },
+            ).observe(document.querySelector(".hero-stats"));
+
+            // =====================
+            // SKILL BARS
+            // =====================
+            new IntersectionObserver(
+                (ents) => {
+                    ents.forEach((e) => {
+                        if (e.isIntersecting)
+                            e.target
+                                .querySelectorAll(".skill-fill")
+                                .forEach(
+                                    (b) => (b.style.width = b.dataset.w + "%"),
+                                );
+                    });
+                },
+                { threshold: 0.15 },
+            ).observe(document.getElementById("skills"));
+
+            // =====================
+            // PROJECT FILTER
+            // =====================
+            const flts = document.querySelectorAll(".flt");
+            const cards = document.querySelectorAll(".proj-card");
+            flts.forEach((btn) =>
+                btn.addEventListener("click", () => {
+                    flts.forEach((b) => b.classList.remove("on"));
+                    btn.classList.add("on");
+                    const f = btn.dataset.f;
+                    cards.forEach((c) =>
+                        c.classList.toggle(
+                            "hidden",
+                            f !== "all" && !(c.dataset.cat || "").includes(f),
+                        ),
+                    );
+                }),
+            );
+
+            // =====================
+            // SCROLL REVEAL
+            // =====================
+            const ro = new IntersectionObserver(
+                (ents) => {
+                    ents.forEach((e) => {
+                        if (e.isIntersecting) e.target.classList.add("on");
+                    });
+                },
+                { threshold: 0.07 },
+            );
+            document
+                .querySelectorAll(".reveal")
+                .forEach((el) => ro.observe(el));
+
+            // =====================
+            // NAVBAR SCROLL
+            // =====================
+            window.addEventListener("scroll", () =>
+                document
+                    .getElementById("navbar")
+                    .classList.toggle("scrolled", scrollY > 40),
+            );
+
+            // =====================
+            // HAMBURGER
+            // =====================
+            const ham = document.getElementById("hamburger");
+            const mnav = document.getElementById("mobile-nav");
+            ham.addEventListener("click", () => {
+                ham.classList.toggle("open");
+                mnav.classList.toggle("open");
+            });
+            mnav.querySelectorAll("a").forEach((a) =>
+                a.addEventListener("click", () => {
+                    ham.classList.remove("open");
+                    mnav.classList.remove("open");
+                }),
+            );
+
+            // =====================
+            // CURSOR
+            // =====================
+            const dot = document.querySelector(".cursor-dot");
+            const ring = document.querySelector(".cursor-ring");
+            let cx = 0,
+                cy = 0,
+                rx = 0,
+                ry = 0;
+            document.addEventListener("mousemove", (e) => {
+                cx = e.clientX;
+                cy = e.clientY;
+                dot.style.transform = `translate(${cx}px,${cy}px)`;
+            });
+            (function anim() {
+                rx += (cx - rx) * 0.12;
+                ry += (cy - ry) * 0.12;
+                ring.style.transform = `translate(${rx}px,${ry}px)`;
+                requestAnimationFrame(anim);
+            })();
+            document.querySelectorAll("a,button").forEach((el) => {
+                el.addEventListener("mouseenter", () =>
+                    ring.classList.add("hover"),
+                );
+                el.addEventListener("mouseleave", () =>
+                    ring.classList.remove("hover"),
+                );
+            });
+
+            // =====================
+            // THEME
+            // =====================
+            const themeBtn = document.getElementById("theme-btn");
+            function setTheme(t) {
+                document.documentElement.setAttribute("data-theme", t);
+                themeBtn.innerHTML =
+                    t === "dark"
+                        ? '<i class="fas fa-sun"></i>'
+                        : '<i class="fas fa-moon"></i>';
+                localStorage.setItem("theme", t);
+            }
+            setTheme(localStorage.getItem("theme") || "light");
+            themeBtn.addEventListener("click", () =>
+                setTheme(
+                    document.documentElement.getAttribute("data-theme") ===
+                        "dark"
+                        ? "light"
+                        : "dark",
+                ),
+            );
+        </script>
+    </body>
 </html>
