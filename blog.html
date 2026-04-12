@@ -3,129 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Shubham Baid</title>
+    <title>Blog — Shubham Baid</title>
+    <meta name="description" content="Insights, articles, and thoughts on AI, Computer Vision, and technology by Shubham Baid.">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .blog-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .blog-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 1.5rem; padding: 1.25rem 1.5rem; background: var(--card); border-bottom: 1px solid var(--border); transition: background 0.15s; }
+        .blog-item:last-child { border-bottom: none; }
+        .blog-item:hover { background: var(--bg-2); }
+        .blog-date { font-family: var(--mono); font-size: 0.72rem; color: var(--text-3); line-height: 1.5; }
+        .blog-title { font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+        .blog-title span { display: block; font-size: 0.78rem; font-weight: 400; color: var(--text-2); margin-top: 0.25rem; }
+        .blog-arrow { color: var(--text-3); font-size: 0.8rem; transition: color 0.15s, transform 0.15s; }
+        .blog-item:hover .blog-arrow { color: var(--accent); transform: translateX(3px); }
+        .page-hero { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); }
+        .page-hero-label { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.75rem; }
+        .page-hero p { font-size: 0.95rem; color: var(--text-2); max-width: 520px; line-height: 1.75; }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="nav-logo">Shubham Baid</a> <!-- Link back to home -->
-            <ul class="nav-menu">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#experience">Experience</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="index.html#publications">Publications</a></li>
-                <li><a href="index.html#education">Education</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <button id="theme-toggle" class="theme-toggle-btn">
-                <i class="fas fa-moon"></i>
-            </button>
-             <div class="nav-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Blog Content Section -->
-    <section id="blog" class="blog-content fade-in-section">
-        <div class="container">
-            <h1 class="section-title">My Blog</h1>
-            <p>Insights, articles, and thoughts on AI, Computer Vision, and technology.</p>
-            <div class="projects-grid blog-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Make your Deep Learning models infer at Minato speed in Python.</h3>
-                        <p>Published on: Sun, 02 May 2021</p>
-                        <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c?source=rss-4cf916ccabe8------2" target="_blank" class="btn btn-primary read-more-btn">Read More</a>
-                    </div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Navbar -->
+<nav class="navbar scrolled" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">&lt;<span>SB</span>/&gt;</a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#publications">Publications</a></li>
+            <li><a href="blog.html" style="color:var(--text);">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="asset/Shubham_Baid.pdf" download class="nav-cv-btn">Download CV</a>
+            <button id="theme-btn" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+    <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="container">
+        <div class="page-hero-label">Writing</div>
+        <h1>Blog</h1>
+        <p>Insights, articles, and thoughts on AI, Computer Vision, and building things that work in the real world.</p>
+    </div>
+</div>
+
+<!-- Blog Posts -->
+<section class="section">
+    <div class="container">
+        <div class="section-meta">
+            <span class="section-num">01</span>
+            <h2 class="section-title">Articles</h2>
+        </div>
+        <div class="blog-list">
+            <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c" target="_blank" class="blog-item">
+                <div class="blog-date">May 02<br>2021</div>
+                <div class="blog-title">
+                    Make your Deep Learning models infer at Minato speed in Python
+                    <span>Practical techniques for accelerating DL inference pipelines — TensorRT, quantization, and beyond.</span>
                 </div>
+                <i class="fas fa-arrow-right blog-arrow"></i>
+            </a>
+        </div>
+        <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-3);font-family:var(--mono);">
+            More articles on <a href="https://shubhambaid.medium.com" target="_blank" style="color:var(--accent-text);">Medium →</a>
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-logo">&lt;<span>SB</span>/&gt;</div>
+            <span class="footer-copy">© 2025 Shubham Baid · Senior AI Engineer</span>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/shubhambaid" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/shubhamkahanhai" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://shubhambaid.medium.com" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
             </div>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 Shubham Baid. All rights reserved.</p>
-            <div class="social-links">
-                 <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                 <a href="https://github.com/shubhambaid" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="mailto:shubhambaid99@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>AI and Computer Vision Engineer | Builder & Generalist</p>
-        </div>
-    </footer>
+<script>
+// Hamburger
+const ham = document.getElementById('hamburger');
+const mnav = document.getElementById('mobile-nav');
+ham.addEventListener('click', () => { ham.classList.toggle('open'); mnav.classList.toggle('open'); });
+mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mnav.classList.remove('open'); }));
 
-     <script>
-        // Basic mobile nav toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
+// Cursor
+const dot = document.querySelector('.cursor-dot');
+const ring = document.querySelector('.cursor-ring');
+let cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { cx=e.clientX; cy=e.clientY; dot.style.transform=`translate(${cx}px,${cy}px)`; });
+(function anim(){ rx+=(cx-rx)*.12; ry+=(cy-ry)*.12; ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(anim); })();
+document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>ring.classList.add('hover')); el.addEventListener('mouseleave',()=>ring.classList.remove('hover')); });
 
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Close nav when a link is clicked (optional)
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                // Check if it's a link to the blog page itself or an external link
-                if (!link.getAttribute('href').startsWith('#') && link.getAttribute('href') !== 'blog.html') {
-                     navMenu.classList.remove('active');
-                } else if (link.getAttribute('href').startsWith('#')) {
-                     navMenu.classList.remove('active'); // Close for anchor links on the same page
-                }
-                // Don't close if clicking the Blog link when already on blog.html
-            });
-        });
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const moonIcon = '<i class="fas fa-moon"></i>';
-        const sunIcon = '<i class="fas fa-sun"></i>';
-
-        // Function to set the theme
-        function setTheme(theme) {
-            body.setAttribute('data-theme', theme);
-            themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-            localStorage.setItem('theme', theme);
-        }
-
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(savedTheme);
-
-        // Toggle theme on button click
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
-        // Scroll Animation
-        const sections = document.querySelectorAll('.fade-in-section');
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+// Theme
+const themeBtn = document.getElementById('theme-btn');
+function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('theme', t);
+}
+setTheme(localStorage.getItem('theme') || 'light');
+themeBtn.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+</script>
 </body>
 </html>
