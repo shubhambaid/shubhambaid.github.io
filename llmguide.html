@@ -303,18 +303,43 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('main section');
 
+        // Cache section offsets to avoid layout thrashing on scroll
+        let sectionOffsets = [];
+        function updateSectionOffsets() {
+            sectionOffsets = Array.from(sections).map(section => section.offsetTop);
+        }
+        updateSectionOffsets();
+        window.addEventListener('resize', updateSectionOffsets);
+
+        let currentActiveIndex = -1;
+
         function changeActiveLink() {
             let index = sections.length;
-            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            while(--index && window.scrollY + 100 < sectionOffsets[index]) {}
             
-            navLinks.forEach((link) => link.classList.remove('active'));
-            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
+            // Only update DOM if the active section has changed
+            if (currentActiveIndex !== index) {
+                currentActiveIndex = index;
+                navLinks.forEach((link) => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
             }
         }
         changeActiveLink(); // Initial call
-        window.addEventListener('scroll', changeActiveLink);
+
+        // Throttle scroll event to frame rate
+        let isScrolling = false;
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    changeActiveLink();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', function (e) {
