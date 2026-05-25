@@ -1262,11 +1262,11 @@
                 }
             }
 
+            let isDarkTheme = document.documentElement.getAttribute("data-theme") === "dark";
+
             function drawCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                const dark =
-                    document.documentElement.getAttribute("data-theme") ===
-                    "dark";
+                const dark = isDarkTheme;
                 const nodeAlpha = dark ? 0.18 : 0.09;
                 const lineAlpha = dark ? 0.07 : 0.045;
                 const color = dark ? "100,110,200" : "60,60,120";
@@ -1481,6 +1481,7 @@
             const themeBtn = document.getElementById("theme-btn");
             function setTheme(t) {
                 document.documentElement.setAttribute("data-theme", t);
+                isDarkTheme = (t === "dark");
                 themeBtn.innerHTML =
                     t === "dark"
                         ? '<i class="fas fa-sun"></i>'
