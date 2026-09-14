@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — Shubham Baid</title>
-    <meta name="description" content="Insights, articles, and thoughts on AI, Computer Vision, and technology by Shubham Baid.">
+    <title>Blog & Writing — Shubham Baid</title>
+    <meta name="description" content="Technical writing, articles, and insights on Deep Learning inference optimization, Video AI, and Computer Vision by Shubham Baid.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .blog-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-        .blog-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 1.5rem; padding: 1.25rem 1.5rem; background: var(--card); border-bottom: 1px solid var(--border); transition: background 0.15s; }
-        .blog-item:last-child { border-bottom: none; }
-        .blog-item:hover { background: var(--bg-2); }
-        .blog-date { font-family: var(--mono); font-size: 0.72rem; color: var(--text-3); line-height: 1.5; }
-        .blog-title { font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.4; }
-        .blog-title span { display: block; font-size: 0.78rem; font-weight: 400; color: var(--text-2); margin-top: 0.25rem; }
-        .blog-arrow { color: var(--text-3); font-size: 0.8rem; transition: color 0.15s, transform 0.15s; }
-        .blog-item:hover .blog-arrow { color: var(--accent); transform: translateX(3px); }
-        .page-hero { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); }
-        .page-hero-label { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
-        .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.75rem; }
-        .page-hero p { font-size: 0.95rem; color: var(--text-2); max-width: 520px; line-height: 1.75; }
+        .blog-list { display: flex; flex-direction: column; gap: 1rem; }
+        .blog-card {
+            display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 1.5rem;
+            padding: 1.5rem 1.75rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius); backdrop-filter: blur(16px);
+            transition: all 0.3s var(--ease);
+        }
+        .blog-card:hover {
+            border-color: var(--border-glow); transform: translateY(-3px);
+            box-shadow: 0 10px 30px -10px var(--accent-glow);
+        }
+        .blog-date { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); line-height: 1.5; font-weight: 600; }
+        .blog-title { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.4; }
+        .blog-desc { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.6; }
+        .blog-arrow { color: var(--text-dim); font-size: 0.9rem; transition: all 0.2s; }
+        .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(5px); }
+        .page-hero { padding: 9rem 0 3.5rem; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+        .page-hero-label { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 600; }
+        .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.85rem; }
+        .page-hero p { font-size: 1rem; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
+        @media (max-width: 650px) {
+            .blog-card { grid-template-columns: 1fr; gap: 0.75rem; }
+            .blog-arrow { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -40,14 +51,14 @@
             <li><a href="index.html#experience">Experience</a></li>
             <li><a href="index.html#skills">Skills</a></li>
             <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#publications">Publications</a></li>
-            <li><a href="blog.html" style="color:var(--text);">Blog</a></li>
+            <li><a href="index.html#publications">Publications & Patents</a></li>
+            <li><a href="blog.html" style="color:var(--text); font-weight:700;">Blog</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <a href="asset/Shubham_Baid.pdf" download class="nav-cv-btn">Download CV</a>
-            <button id="theme-btn" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <a href="asset/Shubham_Baid.pdf" download class="nav-cv-btn"><i class="fas fa-file-pdf"></i> Resume</a>
+            <button id="theme-btn" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
+            <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </div>
 </nav>
@@ -58,7 +69,7 @@
         <li><a href="index.html#experience">Experience</a></li>
         <li><a href="index.html#skills">Skills</a></li>
         <li><a href="index.html#projects">Projects</a></li>
-        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#publications">Publications & Patents</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="index.html#contact">Contact</a></li>
     </ul>
@@ -67,9 +78,9 @@
 <!-- Page Hero -->
 <div class="page-hero">
     <div class="container">
-        <div class="page-hero-label">Writing</div>
-        <h1>Blog</h1>
-        <p>Insights, articles, and thoughts on AI, Computer Vision, and building things that work in the real world.</p>
+        <div class="page-hero-label"><i class="fas fa-pen-nib"></i> Technical Writing</div>
+        <h1>Blog & Articles</h1>
+        <p>Technical articles, practical tutorials, and engineering perspectives on deep learning inference, high-performance computer vision, and AI systems.</p>
     </div>
 </div>
 
@@ -78,20 +89,20 @@
     <div class="container">
         <div class="section-meta">
             <span class="section-num">01</span>
-            <h2 class="section-title">Articles</h2>
+            <h2 class="section-title">Published Articles</h2>
         </div>
         <div class="blog-list">
-            <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c" target="_blank" class="blog-item">
-                <div class="blog-date">May 02<br>2021</div>
-                <div class="blog-title">
-                    Make your Deep Learning models infer at Minato speed in Python
-                    <span>Practical techniques for accelerating DL inference pipelines — TensorRT, quantization, and beyond.</span>
+            <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c" target="_blank" class="blog-card" rel="noopener">
+                <div class="blog-date">MAY 02, 2021</div>
+                <div>
+                    <h3 class="blog-title">Make your Deep Learning models infer at Minato speed in Python</h3>
+                    <span class="blog-desc">Practical guide and techniques for accelerating deep learning inference pipelines — TensorRT, model quantization, and optimization strategies in Python.</span>
                 </div>
                 <i class="fas fa-arrow-right blog-arrow"></i>
             </a>
         </div>
-        <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-3);font-family:var(--mono);">
-            More articles on <a href="https://shubhambaid.medium.com" target="_blank" style="color:var(--accent-text);">Medium →</a>
+        <p style="margin-top:2rem;font-size:0.88rem;color:var(--text-muted);font-family:var(--mono);">
+            Follow more publications on <a href="https://shubhambaid.medium.com" target="_blank" style="color:var(--accent);" rel="noopener">Medium →</a>
         </p>
     </div>
 </section>
@@ -100,13 +111,13 @@
 <footer>
     <div class="container">
         <div class="footer-inner">
-            <div class="footer-logo">&lt;<span>SB</span>/&gt;</div>
-            <span class="footer-copy">© 2025 Shubham Baid · Senior AI Engineer</span>
+            <div class="footer-logo">&lt;<span>SB</span>/&gt; Shubham Baid</div>
+            <span class="footer-copy">© 2025 Shubham Baid · AI Systems Engineer</span>
             <div class="footer-socials">
-                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/shubhambaid" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com/shubhamkahanhai" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://shubhambaid.medium.com" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" aria-label="LinkedIn" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/shubhambaid" target="_blank" aria-label="GitHub" rel="noopener"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/shubhamkahanhai" target="_blank" aria-label="Twitter" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://shubhambaid.medium.com" target="_blank" aria-label="Medium" rel="noopener"><i class="fab fa-medium"></i></a>
             </div>
         </div>
     </div>
@@ -116,26 +127,28 @@
 // Hamburger
 const ham = document.getElementById('hamburger');
 const mnav = document.getElementById('mobile-nav');
-ham.addEventListener('click', () => { ham.classList.toggle('open'); mnav.classList.toggle('open'); });
-mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mnav.classList.remove('open'); }));
+if (ham && mnav) {
+    ham.addEventListener('click', () => { ham.classList.toggle('open'); mnav.classList.toggle('open'); });
+    mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mnav.classList.remove('open'); }));
+}
 
 // Cursor
 const dot = document.querySelector('.cursor-dot');
 const ring = document.querySelector('.cursor-ring');
 let cx=0,cy=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { cx=e.clientX; cy=e.clientY; dot.style.transform=`translate(${cx}px,${cy}px)`; });
-(function anim(){ rx+=(cx-rx)*.12; ry+=(cy-ry)*.12; ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(anim); })();
-document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>ring.classList.add('hover')); el.addEventListener('mouseleave',()=>ring.classList.remove('hover')); });
+document.addEventListener('mousemove', e => { cx=e.clientX; cy=e.clientY; if (dot) dot.style.transform=`translate(${cx}px,${cy}px)`; });
+(function anim(){ rx+=(cx-rx)*.15; ry+=(cy-ry)*.15; if (ring) ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(anim); })();
+document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>ring && ring.classList.add('hover')); el.addEventListener('mouseleave',()=>ring && ring.classList.remove('hover')); });
 
 // Theme
 const themeBtn = document.getElementById('theme-btn');
 function setTheme(t) {
     document.documentElement.setAttribute('data-theme', t);
-    themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if (themeBtn) themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     localStorage.setItem('theme', t);
 }
-setTheme(localStorage.getItem('theme') || 'light');
-themeBtn.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+setTheme(localStorage.getItem('theme') || 'dark');
+if (themeBtn) themeBtn.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 </script>
 </body>
 </html>
