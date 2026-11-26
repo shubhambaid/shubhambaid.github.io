@@ -1,154 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Writing — Shubham Baid</title>
-    <meta name="description" content="Technical writing, articles, and insights on Deep Learning inference optimization, Video AI, and Computer Vision by Shubham Baid.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .blog-list { display: flex; flex-direction: column; gap: 1rem; }
-        .blog-card {
-            display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 1.5rem;
-            padding: 1.5rem 1.75rem; background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); backdrop-filter: blur(16px);
-            transition: all 0.3s var(--ease);
-        }
-        .blog-card:hover {
-            border-color: var(--border-glow); transform: translateY(-3px);
-            box-shadow: 0 10px 30px -10px var(--accent-glow);
-        }
-        .blog-date { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); line-height: 1.5; font-weight: 600; }
-        .blog-title { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.4; }
-        .blog-desc { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.6; }
-        .blog-arrow { color: var(--text-dim); font-size: 0.9rem; transition: all 0.2s; }
-        .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(5px); }
-        .page-hero { padding: 9rem 0 3.5rem; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
-        .page-hero-label { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 600; }
-        .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.85rem; }
-        .page-hero p { font-size: 1rem; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
-        @media (max-width: 650px) {
-            .blog-card { grid-template-columns: 1fr; gap: 0.75rem; }
-            .blog-arrow { display: none; }
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Writing, Research Notes &amp; Guides — Shubham Baid</title>
+        <meta
+            name="description"
+            content="Preprints, Hugging Face research cards, interactive guides, and technical writing by Shubham Baid on video compression, mixed-precision quantization, and inference optimization."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <a href="index.html" class="brand-wordmark">Shubham Baid</a>
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+                <nav class="header-nav" aria-label="Primary navigation">
+                    <a href="index.html#lab">Systems Lab</a>
+                    <a href="index.html#work">Work</a>
+                    <a href="index.html#publications">Publications</a>
+                    <a href="index.html#experience">Experience</a>
+                    <a href="blog.html" class="active">Writing</a>
+                </nav>
 
-<!-- Navbar -->
-<nav class="navbar scrolled" id="navbar">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">&lt;<span>SB</span>/&gt;</a>
-        <ul class="nav-links">
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#experience">Experience</a></li>
-            <li><a href="index.html#skills">Skills</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#publications">Publications & Patents</a></li>
-            <li><a href="blog.html" style="color:var(--text); font-weight:700;">Blog</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <div class="nav-actions">
-            <a href="asset/Shubham_Baid.pdf" download class="nav-cv-btn"><i class="fas fa-file-pdf"></i> Resume</a>
-            <button id="theme-btn" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
-            <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-        </div>
-    </div>
-</nav>
-
-<div class="mobile-nav" id="mobile-nav">
-    <ul>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#experience">Experience</a></li>
-        <li><a href="index.html#skills">Skills</a></li>
-        <li><a href="index.html#projects">Projects</a></li>
-        <li><a href="index.html#publications">Publications & Patents</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-</div>
-
-<!-- Page Hero -->
-<div class="page-hero">
-    <div class="container">
-        <div class="page-hero-label"><i class="fas fa-pen-nib"></i> Technical Writing</div>
-        <h1>Blog & Articles</h1>
-        <p>Technical articles, practical tutorials, and engineering perspectives on deep learning inference, high-performance computer vision, and AI systems.</p>
-    </div>
-</div>
-
-<!-- Blog Posts -->
-<section class="section">
-    <div class="container">
-        <div class="section-meta">
-            <span class="section-num">01</span>
-            <h2 class="section-title">Published Articles</h2>
-        </div>
-        <div class="blog-list">
-            <a href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c" target="_blank" class="blog-card" rel="noopener">
-                <div class="blog-date">MAY 02, 2021</div>
-                <div>
-                    <h3 class="blog-title">Make your Deep Learning models infer at Minato speed in Python</h3>
-                    <span class="blog-desc">Practical guide and techniques for accelerating deep learning inference pipelines — TensorRT, model quantization, and optimization strategies in Python.</span>
+                <div class="header-cta-zone">
+                    <a href="asset/Shubham_Baid.pdf" download class="btn btn-primary">
+                        Resume PDF
+                    </a>
+                    <button
+                        type="button"
+                        id="mobile-menu-btn"
+                        class="mobile-menu-btn"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="mobile-drawer"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                    </button>
                 </div>
-                <i class="fas fa-arrow-right blog-arrow"></i>
-            </a>
-        </div>
-        <p style="margin-top:2rem;font-size:0.88rem;color:var(--text-muted);font-family:var(--mono);">
-            Follow more publications on <a href="https://shubhambaid.medium.com" target="_blank" style="color:var(--accent);" rel="noopener">Medium →</a>
-        </p>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="footer-inner">
-            <div class="footer-logo">&lt;<span>SB</span>/&gt; Shubham Baid</div>
-            <span class="footer-copy">© 2025 Shubham Baid · AI Systems Engineer</span>
-            <div class="footer-socials">
-                <a href="https://www.linkedin.com/in/shubhambaid21" target="_blank" aria-label="LinkedIn" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/shubhambaid" target="_blank" aria-label="GitHub" rel="noopener"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com/shubhamkahanhai" target="_blank" aria-label="Twitter" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://shubhambaid.medium.com" target="_blank" aria-label="Medium" rel="noopener"><i class="fab fa-medium"></i></a>
             </div>
-        </div>
-    </div>
-</footer>
 
-<script>
-// Hamburger
-const ham = document.getElementById('hamburger');
-const mnav = document.getElementById('mobile-nav');
-if (ham && mnav) {
-    ham.addEventListener('click', () => { ham.classList.toggle('open'); mnav.classList.toggle('open'); });
-    mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mnav.classList.remove('open'); }));
-}
+            <div id="mobile-drawer" class="mobile-drawer">
+                <nav aria-label="Mobile navigation">
+                    <a href="index.html#lab">Systems Lab</a>
+                    <a href="index.html#work">Work</a>
+                    <a href="index.html#publications">Publications</a>
+                    <a href="index.html#experience">Experience</a>
+                    <a href="blog.html">Writing</a>
+                    <a href="index.html#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
 
-// Cursor
-const dot = document.querySelector('.cursor-dot');
-const ring = document.querySelector('.cursor-ring');
-let cx=0,cy=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { cx=e.clientX; cy=e.clientY; if (dot) dot.style.transform=`translate(${cx}px,${cy}px)`; });
-(function anim(){ rx+=(cx-rx)*.15; ry+=(cy-ry)*.15; if (ring) ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(anim); })();
-document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>ring && ring.classList.add('hover')); el.addEventListener('mouseleave',()=>ring && ring.classList.remove('hover')); });
+        <main>
+            <section class="page-intro">
+                <div class="container">
+                    <div class="section-kicker">Technical Writing &amp; Research Notes</div>
+                    <h1 class="section-title" style="font-size: clamp(2.1rem, 4vw, 3.25rem); margin-bottom: 1rem;">
+                        Papers, model cards &amp; field guides
+                    </h1>
+                    <p class="section-subtitle">
+                        Empirical investigations into video compression for machine perception, mixed-precision
+                        quantization on Apple Silicon, single-pass decision models, and practical inference optimization.
+                    </p>
+                </div>
+            </section>
 
-// Theme
-const themeBtn = document.getElementById('theme-btn');
-function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    if (themeBtn) themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    localStorage.setItem('theme', t);
-}
-setTheme(localStorage.getItem('theme') || 'dark');
-if (themeBtn) themeBtn.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-</script>
-</body>
+            <section class="section">
+                <div class="container">
+                    <div class="article-list">
+                        <a
+                            href="https://huggingface.co/shubhambaid/LFM3-VL-2B-MLX-mixed-v8p8b4e4"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">Nov 2026 · Model Card</div>
+                            <div>
+                                <h2 class="article-title">LFM3-VL-2B Mixed-Precision Quantization &amp; Paired Fidelity Evaluation</h2>
+                                <p class="article-desc">
+                                    1.266 GB Apple MLX weights preserving LiquidAI's QAD 4-bit backbone while holding
+                                    vision and projector at 8-bit—selected via teacher-forced KL across 1,500 paired VQA items.
+                                </p>
+                            </div>
+                            <span class="article-cta">Read on HF &nearr;</span>
+                        </a>
+
+                        <a
+                            href="https://huggingface.co/shubhambaid/verdict"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">Sep 2026 · Model Card</div>
+                            <div>
+                                <h2 class="article-title">Verdict v1: Single-Pass Calibrated Visual Decisions on Frozen SigLIP2</h2>
+                                <p class="article-desc">
+                                    Architecture notes, order-invariant option tokens, explicit OTHER abstention, and an
+                                    unvarnished breakdown of seen/unseen gains alongside EuroSAT domain-shift regressions.
+                                </p>
+                            </div>
+                            <span class="article-cta">Read on HF &nearr;</span>
+                        </a>
+
+                        <a
+                            href="https://github.com/shubhambaid/lfm2vl-lab"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">Aug 2026 · Research Lab</div>
+                            <div>
+                                <h2 class="article-title">LFM2.5-VL Lab: Auditing Quantization Coverage &amp; Non-Monotonic Visual Token Budgets</h2>
+                                <p class="article-desc">
+                                    Why nominal 4-bit labels hide unquantized SigLIP2 fc2 layers across 56 Hugging Face
+                                    repos, and why 512 visual tokens beat 1024 on ScreenSpot-v2.
+                                </p>
+                            </div>
+                            <span class="article-cta">View Lab &nearr;</span>
+                        </a>
+
+                        <a
+                            href="https://arxiv.org/abs/2607.19515"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">Jul 2026 · arXiv</div>
+                            <div>
+                                <h2 class="article-title">BLUE: Semantics-Preserving Video Compression for Efficient Vision-Language Surveillance Analytics</h2>
+                                <p class="article-desc">
+                                    Paired blind VLM judging across 227 VIRAT event samples and 54 CHAD anomaly clips
+                                    evaluating semantic retention under BLUE-compressed H.265.
+                                </p>
+                            </div>
+                            <span class="article-cta">Read Paper &nearr;</span>
+                        </a>
+
+                        <a
+                            href="https://arxiv.org/abs/2606.28753"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">Jun 2026 · arXiv</div>
+                            <div>
+                                <h2 class="article-title">BLUE: A Stale-Pixel Optical-Flow Compositor for Entropy-Efficient Surveillance Video Encoding</h2>
+                                <p class="article-desc">
+                                    Six-point CRF sweep across x264 and x265 on 308 VIRAT clips demonstrating 34.6% and
+                                    39.4% mean file-size reduction at CRF 28 without altering standard decoders.
+                                </p>
+                            </div>
+                            <span class="article-cta">Read Paper &nearr;</span>
+                        </a>
+
+                        <a href="llmguide.html" class="article-row">
+                            <div class="article-date">Interactive Guide</div>
+                            <div>
+                                <h2 class="article-title">Interactive Guide to LLM Testing, Evaluation &amp; Fine-Tuning</h2>
+                                <p class="article-desc">
+                                    Sortable evaluation metrics comparison, Prompt Engineering vs RAG vs Fine-Tuning
+                                    decision matrix, resource charts, and PEFT/LoRA practitioner notes.
+                                </p>
+                            </div>
+                            <span class="article-cta">Open Guide &rarr;</span>
+                        </a>
+
+                        <a
+                            href="https://shubhambaid.medium.com/make-your-deep-learning-models-infer-at-minato-speed-in-python-19563327425c"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="article-row"
+                        >
+                            <div class="article-date">May 2021 · Medium</div>
+                            <div>
+                                <h2 class="article-title">Make your Deep Learning models infer at Minato speed in Python</h2>
+                                <p class="article-desc">
+                                    Practical engineering walkthrough on accelerating deep learning inference pipelines
+                                    with TensorRT, quantization, and runtime optimization in Python.
+                                </p>
+                            </div>
+                            <span class="article-cta">Read on Medium &nearr;</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div>© 2026 Shubham Baid · Bengaluru, India</div>
+                <div class="footer-links">
+                    <a href="index.html">Portfolio Home</a>
+                    <a href="https://github.com/shubhambaid" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://huggingface.co/shubhambaid" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+                    <button type="button" class="theme-switch" data-theme-toggle aria-label="Switch theme">
+                        <span data-theme-label>Light mode</span>
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
 </html>
